@@ -8,6 +8,7 @@ Writes logs/tasks.jsonl and results/tasks.json.
 from __future__ import annotations
 
 import json
+import re
 import time
 import urllib.parse
 import urllib.request
@@ -37,7 +38,7 @@ def task(goal: str, *, cost: float, runtime: int = 300, model: str = "moss-fast"
 
 SPECS = [
     # --- known answers ---------------------------------------------------------------
-    {"label": "K1 example.com heading", "kind": "known", "expect": "Example Domain",
+    {"label": "K1 example.com heading", "kind": "known", "expect": "example_h1",
      "body": task("Open https://example.com and return the exact text of the page's main heading (the h1).",
                   cost=0.20, start_url="https://example.com",
                   schema={"type": "object", "properties": {"heading": {"type": "string"}}, "required": ["heading"]},
@@ -83,6 +84,14 @@ def hn_top5() -> list[str]:
     return titles
 
 
+def example_h1() -> str:
+    """Ground truth for K1 from the live page: the text of its first <h1>, or "" when it has none."""
+    with urllib.request.urlopen("https://example.com", timeout=15) as r:
+        html = r.read().decode("utf-8", "replace")
+    m = re.search(r"<h1[^>]*>(.*?)</h1>", html, re.S | re.I)
+    return re.sub(r"<[^>]+>", "", m.group(1)).strip() if m else ""
+
+
 def norm(s: str) -> str:
     return " ".join(str(s).lower().split())
 
@@ -93,8 +102,9 @@ def grade(spec: dict, t: dict, truth: dict) -> dict:
     output = result.get("output") or {}
     text = result.get("output_text") or ""
     g = {"status": status, "error_code": err.get("code"), "verification_passed": (t.get("verification") or {}).get("passed")}
-    if spec["expect"] == "Example Domain":
-        g["correct"] = norm(output.get("heading", text)) == norm("Example Domain")
+    if spec["expect"] == "example_h1":  # read from the live page: example.com has had no <h1> since its redesign
+        g["truth"] = truth.get("example_h1")
+        g["correct"] = norm(output.get("heading", text)) == norm(truth.get("example_h1") or "")
     elif spec["expect"] == 1.75:
         val = output.get("price_usd_per_million")
         g["correct"] = val == 1.75 or "1.75" in text
@@ -249,7 +259,7 @@ def main() -> None:
     m = Moss("tasks")
     report: dict = {"started": time.time(), "caps_usd": sum(s["body"]["limits"]["max_cost_usd"] for s in SPECS) + 0.20}
     report["validation"] = validation(m)
-    truth = {"hn": [hn_top5()]}
+    truth = {"hn": [hn_top5()], "example_h1": example_h1()}
     ids: dict[str, str] = {}
     created: dict[str, dict] = {}
     for spec in SPECS:

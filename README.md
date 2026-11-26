@@ -18,6 +18,9 @@ Completions on `moss/fastlane-1`) and the Tasks API (hosted browser agents).
 - `harness/concurrency.py`: first token with 1, 3, 5 and 8 calls started at the same instant.
 - `harness/f4_check.py`: checks the F4 task's 30 comment counts against the official Hacker News API.
 - `harness/tasks_timeout.py`: F4b, a task that cannot finish in 60 s, so the time limit really fires.
+- `harness/grounding_and_catalog.py`: grounding with the project's index (with vs without `X-Moss-Indexes`) and
+  a catalog vendor model without a provider key.
+- `harness/luna_same_model.py`: the same model (`openai/gpt-6-luna`) through Moss and through OpenRouter.
 - `harness/report.py`: builds `results/RESULTS.md` from `results/*.json`.
 - `brisvox/`: voice-to-voice A/B inside brisvox, Moss vs OpenRouter as the LLM, everything else the same
   (`run_ab.sh`, the agent files, `nocache_proxy.py` for the reply-cache-off arm, `ab_summary.py`, raw results
@@ -36,6 +39,8 @@ python harness/concurrency.py
 python harness/tasks_tests.py
 python harness/tasks_timeout.py
 python harness/f4_check.py
+python harness/grounding_and_catalog.py      # MOSS_INDEX names the index (default product-search-context)
+OPENROUTER_API_KEY=... python harness/luna_same_model.py
 python harness/report.py
 ```
 

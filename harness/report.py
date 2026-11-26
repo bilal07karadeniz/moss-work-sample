@@ -45,7 +45,8 @@ def inference_md(r: dict) -> list[str]:
                 f"{fmt(g.get('grounded_stream_first_token_ms'))} ms.", "",
                 f"- without index: {g.get('plain_text')!r}", f"- with index: {g.get('grounded_text')!r}", ""]
     else:
-        out += ["No index in the project (`MOSS_INDEX` empty), so only the error path was tested.", ""]
+        out += ["`MOSS_INDEX` was empty in this run, so only the error path was tested here. The project does have an "
+                "index (I missed it until the Portal review); grounding is measured in the follow-up section below.", ""]
     out += [f"Unknown index name: HTTP {g.get('unknown_index_status')}, "
             f"`{json.dumps((g.get('unknown_index_error') or {}).get('error') if isinstance(g.get('unknown_index_error'), dict) else g.get('unknown_index_error'))}`", ""]
     t = r.get("tools", {})
@@ -64,8 +65,8 @@ def inference_md(r: dict) -> list[str]:
         out.append(f"| {p['probe']} | {p['want_status']} {p.get('want_code') or ''} | {p['got_status']} | "
                    f"{p.get('got_code') or ''} | {p.get('x_should_retry') or ''} | {'yes' if p['ok'] else '**no**'} |")
     if any(p["probe"] == "33 indexes" for p in r.get("probes", [])):
-        out += ["", "The `33 indexes` row is my probe's fault, not Moss's: the project has no index, so all 33 names are "
-                "unknown and the 403 for an index outside the project is correct. The 32-name cap was not tested."]
+        out += ["", "The `33 indexes` row is my probe's fault, not Moss's: the 33 names were made up, so they are unknown "
+                "and the 403 for an index outside the project is correct. The 32-name cap was not tested."]
     msgs = [p for p in r.get("probes", []) if p.get("message")]
     if msgs:
         out += ["", "Error messages returned:", ""] + [f"- {p['probe']}: {p['message']}" for p in msgs]
@@ -97,7 +98,8 @@ def tasks_md(r: dict) -> list[str]:
     for t in r.get("tasks", []):
         ans = json.dumps(t.get("output")) if t.get("output") else (t.get("output_text") or "")
         err = t.get("error") or {}
-        out.append(f"- **{t['label']}**: {ans[:400]!s}" + (f" — error `{err.get('code')}`: {err.get('message')}" if err else ""))
+        out.append(f"- **{t['label']}**: {ans[:400]!s}" + (f" — error `{err.get('code')}`: {err.get('message')}" if err else "")
+                   + (f" (regraded: {(t.get('grade') or {}).get('regraded')})" if (t.get('grade') or {}).get('regraded') else ""))
     if r.get("hn_truth"):
         out += ["", f"Hacker News API top 5 at task creation: {r['hn_truth'][0]}",
                 f"and after the tasks ended: {r['hn_truth'][-1]}"]
@@ -208,12 +210,54 @@ def ab_md(ab: dict) -> list[str]:
     return out
 
 
+def followups_md(g: dict, luna: dict) -> list[str]:
+    out: list[str] = []
+    if g:
+        out += ["## Grounding with the project's index (`harness/grounding_and_catalog.py`)", "",
+                f"Index `{g['index']}` (100-item clothing catalog, created in the Portal on Nov 16). Same question with and "
+                "without `X-Moss-Indexes`:", "", "| question | without index | with index | retrieve ms |", "|---|---|---|---|"]
+        for r in g["qa"]:
+            out.append(f"| {r['question']} | {r['without']['text']} | {r['with']['text']} | {r['with']['retrieve_ms']} |")
+        lt = g["latency"]
+        out += ["", f"Streamed first token, 10 calls each, interleaved: with the index p50 {fmt(lt['with']['p50'])} ms, "
+                f"without {fmt(lt['without']['p50'])} ms; `X-Moss-Retrieve-Ms` p50 {fmt(lt['retrieve_ms']['p50'], 1)} ms "
+                f"(max {fmt(lt['retrieve_ms']['max'], 1)}). The very first grounded call reported "
+                f"{g['qa'][0]['with']['retrieve_ms']} ms of retrieval (cold index).", ""]
+        c = g.get("catalog_luna") or {}
+        if c:
+            out += [f"`openai/gpt-6-luna` from the Moss catalog without `X-Moss-Provider-Key`: HTTP "
+                    f"{sorted({x['status'] for x in c['calls']})}, Responses first token p50 {fmt(c.get('first_token_p50'))} ms "
+                    f"(no `reasoning_effort` sent).", ""]
+    if luna:
+        out += ["## Same model, two gateways (`harness/luna_same_model.py`)", "",
+                "`openai/gpt-6-luna`, Chat Completions streaming, `reasoning_effort: none`, interleaved, 10 calls each:", "",
+                "| gateway | n | first token p50 | p90 | min | max |", "|---|---|---|---|---|---|"]
+        for k in ("moss", "openrouter"):
+            x = luna[k]
+            out.append(f"| {k} | {x['n']} | {fmt(x['p50'])} | {fmt(x['p90'])} | {fmt(x['min'])} | {fmt(x['max'])} |")
+        out += ["", "So in the brisvox A/B most of the gain is `fastlane-1` itself; with the model held equal, Moss's path is "
+                "~115 ms faster at the median than OpenRouter's.", ""]
+    out += ["## Portal cross-check (read on 2026-11-26)", "",
+            "- Usage: inference `moss/fastlane-1` 73.8K in / 48K cached / 7.9K out = $0.03; browser tasks 11 = $0.14 "
+            "(model tokens $0.13, cloud browser time 6 min = $0.00); cycle total $0.18 including a $0.01 ingest from Nov 16.",
+            "- Logs & Traces / Analytics (24 h): 507 requests, server-side first token p50 49 ms, p95 128 ms, errors 0%, "
+            "success rate 100%, reply cache 6.5%. My client measured 191 ms first token on a warm connection (RTT 43 ms).",
+            "- None of the rejected requests (400/401/403, each with an `X-Moss-Request-Id`) nor the two 502s appear: the "
+            "Error filter is empty, and looking up `ccec899d7b4c4f9287f72471083123ca` (the 400 for `previous_response_id`) "
+            "returns \"No request with that ID in the last 30 days\", while successful ids are found.",
+            "- Tasks list: the dead-host task (F2) and the missing-phone task (F1) show as Succeeded; success rate 78% (7 of 9).",
+            "- K1's recording and screenshots (`results/k1_screenshots/`) show today's example.com, which has no `<h1>` "
+            "(`results/example_com_2026-11-26.html`): K1's empty heading is the right answer, and the grade was corrected."]
+    return out
+
+
 def main() -> None:
     lines = ["# Results", "", "Generated by `harness/report.py` from `results/*.json`; every request is in `logs/*.jsonl`.", ""]
     lines += inference_md(load("inference.json")) + [""] + extra_md(load("inference_extra.json"), load("concurrency.json"))
     lines += [""] + tasks_md(load("tasks.json")) + tasks_extra_md(load("f4_check.json"), load("tasks_timeout.json"))
     ab = ROOT / "brisvox" / "results" / "ab.json"
     lines += [""] + ab_md(json.loads(ab.read_text(encoding="utf-8")) if ab.exists() else {})
+    lines += [""] + followups_md(load("grounding_and_catalog.json"), load("luna_same_model.json"))
     (ROOT / "results" / "RESULTS.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print("wrote results/RESULTS.md")
 

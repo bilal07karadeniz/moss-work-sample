@@ -23,7 +23,7 @@ Same request twice with the cache on: 142 ms, then 141 ms; usage first `{"total_
 
 ### Grounding (`X-Moss-Indexes`)
 
-No index in the project (`MOSS_INDEX` empty), so only the error path was tested.
+`MOSS_INDEX` was empty in this run, so only the error path was tested here. The project does have an index (I missed it until the Portal review); grounding is measured in the follow-up section below.
 
 Unknown index name: HTTP 403, `{"message": "X-Moss-Indexes names an index outside this project", "type": "permission_error", "code": "permission_error", "request_id": "2ee0b251d68c44cebe6904a2a6d9148f"}`
 
@@ -52,7 +52,7 @@ Unknown index name: HTTP 403, `{"message": "X-Moss-Indexes names an index outsid
 | malformed JSON | 400  | 400 | invalid_request_error |  | yes |
 | stop stream after first token | 200  | 200 |  |  | yes |
 
-The `33 indexes` row is my probe's fault, not Moss's: the project has no index, so all 33 names are unknown and the 403 for an index outside the project is correct. The 32-name cap was not tested.
+The `33 indexes` row is my probe's fault, not Moss's: the 33 names were made up, so they are unknown and the 403 for an index outside the project is correct. The 32-name cap was not tested.
 
 Error messages returned:
 
@@ -114,7 +114,7 @@ Caps set: $1.41 of `max_cost_usd` in total. Billed (sum of `usage.cost.total_usd
 
 | Task | model | status / error | graded | queue s | run s | cap $ | model $ | browser $ | traffic $ | total $ | steps |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| K1 example.com heading | moss-fast | completed | wrong | 0.0 | 18.3 | 0.20 | 0.0049 | 0.0003 | - | 0.0052 | 3 |
+| K1 example.com heading | moss-fast | completed | correct | 0.0 | 18.3 | 0.20 | 0.0049 | 0.0003 | - | 0.0052 | 3 |
 | K2 value from the Moss docs | moss-fast | completed | correct | 0.0 | 20.1 | 0.20 | 0.0067 | 0.0003 | - | 0.0071 | 2 |
 | K3 top 5 Hacker News stories | moss-balanced | completed | correct (5/5 in order, 5/5 overlap) | 0.0 | 20.0 | 0.30 | 0.0574 | 0.0003 | - | 0.0577 | 3 |
 | CANCEL-0 | moss-fast | cancelled | - | 0.0 | 2.9 | 0.05 | 0.0000 | 0.0003 | - | 0.0003 | 0 |
@@ -127,7 +127,7 @@ Caps set: $1.41 of `max_cost_usd` in total. Billed (sum of `usage.cost.total_usd
 
 Answers:
 
-- **K1 example.com heading**: {"heading": ""}
+- **K1 example.com heading**: {"heading": ""} (regraded: 2026-11-26: example.com has no <h1> (results/example_com_2026-11-26.html); the original grade expected the old 'Example Domain' heading)
 - **K2 value from the Moss docs**: {"price_usd_per_million": 1.75}
 - **K3 top 5 Hacker News stories**: {"titles": ["Holy shit holy shit holy shit holy shit: The magnitude of what\u2019s now happening", "1Password Security Incident", "Lions' Commentary on Unix: Why It Was Secretly Copied for 20 Years", "Much shorter version of GRH Lean verification from Anthropic", "Minipg: PostgreSQL as a Single Executable"]}
 - **CANCEL-0**: 
@@ -204,3 +204,36 @@ The fixture asks the same two questions on every call, so with the reply cache o
 Proxy: 40 requests, statuses [200], 0 reconnects, upstream first bytes p50 200 ms.
 
 Raw: `brisvox/results/v2v-*.{md,json}`, `brisvox/results/server-*.log`, `brisvox/results/proxy-*.jsonl`, summary `brisvox/results/ab.json`.
+
+## Grounding with the project's index (`harness/grounding_and_catalog.py`)
+
+Index `product-search-context` (100-item clothing catalog, created in the Portal on Nov 16). Same question with and without `X-Moss-Indexes`:
+
+| question | without index | with index | retrieve ms |
+|---|---|---|---|
+| What fill power is the down in your insulated parka? | I'm sorry, I don't have that specific detail. | The down in our insulated parka has a 700-fill power. | 926.0 |
+| Which of your jackets has a zip-out fleece liner? | I don't have access to your store's specific inventory or product details. | The Three-in-One Winter Jacket features a zip-out fleece liner. | 9.3 |
+| What UPF rating does your performance polo shirt have? | I do not have specific product information about the UPF rating for our performance polo shirt. | Our Performance Polo Shirt has a UPF 30 rating. | 9.3 |
+
+Streamed first token, 10 calls each, interleaved: with the index p50 244 ms, without 194 ms; `X-Moss-Retrieve-Ms` p50 9.3 ms (max 12.3). The very first grounded call reported 926.0 ms of retrieval (cold index).
+
+`openai/gpt-6-luna` from the Moss catalog without `X-Moss-Provider-Key`: HTTP [200], Responses first token p50 919 ms (no `reasoning_effort` sent).
+
+## Same model, two gateways (`harness/luna_same_model.py`)
+
+`openai/gpt-6-luna`, Chat Completions streaming, `reasoning_effort: none`, interleaved, 10 calls each:
+
+| gateway | n | first token p50 | p90 | min | max |
+|---|---|---|---|---|---|
+| moss | 10 | 617 | 916 | 558 | 1040 |
+| openrouter | 10 | 732 | 922 | 522 | 43089 |
+
+So in the brisvox A/B most of the gain is `fastlane-1` itself; with the model held equal, Moss's path is ~115 ms faster at the median than OpenRouter's.
+
+## Portal cross-check (read on 2026-11-26)
+
+- Usage: inference `moss/fastlane-1` 73.8K in / 48K cached / 7.9K out = $0.03; browser tasks 11 = $0.14 (model tokens $0.13, cloud browser time 6 min = $0.00); cycle total $0.18 including a $0.01 ingest from Nov 16.
+- Logs & Traces / Analytics (24 h): 507 requests, server-side first token p50 49 ms, p95 128 ms, errors 0%, success rate 100%, reply cache 6.5%. My client measured 191 ms first token on a warm connection (RTT 43 ms).
+- None of the rejected requests (400/401/403, each with an `X-Moss-Request-Id`) nor the two 502s appear: the Error filter is empty, and looking up `ccec899d7b4c4f9287f72471083123ca` (the 400 for `previous_response_id`) returns "No request with that ID in the last 30 days", while successful ids are found.
+- Tasks list: the dead-host task (F2) and the missing-phone task (F1) show as Succeeded; success rate 78% (7 of 9).
+- K1's recording and screenshots (`results/k1_screenshots/`) show today's example.com, which has no `<h1>` (`results/example_com_2026-11-26.html`): K1's empty heading is the right answer, and the grade was corrected.

@@ -288,12 +288,14 @@
         "passed": true
       },
       "kind": "known",
-      "expect": "Example Domain",
+      "expect": "example_h1",
       "grade": {
         "status": "completed",
         "error_code": null,
         "verification_passed": true,
-        "correct": false
+        "correct": true,
+        "truth": "",
+        "regraded": "2026-11-26: example.com has no <h1> (results/example_com_2026-11-26.html); the original grade expected the old 'Example Domain' heading"
       }
     },
     {

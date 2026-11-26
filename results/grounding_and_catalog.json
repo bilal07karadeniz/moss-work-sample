@@ -1,0 +1,115 @@
+{
+  "index": "product-search-context",
+  "started": 1795679925.525695,
+  "qa": [
+    {
+      "question": "What fill power is the down in your insulated parka?",
+      "without": {
+        "status": 200,
+        "text": "I'm sorry, I don't have that specific detail.",
+        "ms": 641.3,
+        "retrieve_ms": "0.0",
+        "correct": false
+      },
+      "with": {
+        "status": 200,
+        "text": "The down in our insulated parka has a 700-fill power.",
+        "ms": 1266.3,
+        "retrieve_ms": "926.0",
+        "correct": true
+      }
+    },
+    {
+      "question": "Which of your jackets has a zip-out fleece liner?",
+      "without": {
+        "status": 200,
+        "text": "I don't have access to your store's specific inventory or product details.",
+        "ms": 313.8,
+        "retrieve_ms": "0.0",
+        "correct": false
+      },
+      "with": {
+        "status": 200,
+        "text": "The Three-in-One Winter Jacket features a zip-out fleece liner.",
+        "ms": 617.2,
+        "retrieve_ms": "9.3",
+        "correct": true
+      }
+    },
+    {
+      "question": "What UPF rating does your performance polo shirt have?",
+      "without": {
+        "status": 200,
+        "text": "I do not have specific product information about the UPF rating for our performance polo shirt.",
+        "ms": 364.7,
+        "retrieve_ms": "0.0",
+        "correct": false
+      },
+      "with": {
+        "status": 200,
+        "text": "Our Performance Polo Shirt has a UPF 30 rating.",
+        "ms": 342.4,
+        "retrieve_ms": "9.3",
+        "correct": true
+      }
+    }
+  ],
+  "latency": {
+    "with": {
+      "n": 10,
+      "p50": 243.76770004164428,
+      "max": 248.45249997451901
+    },
+    "without": {
+      "n": 10,
+      "p50": 193.75370000489056,
+      "max": 211.65439998731017
+    },
+    "retrieve_ms": {
+      "n": 10,
+      "p50": 9.3,
+      "max": 12.3
+    }
+  },
+  "catalog_luna": {
+    "calls": [
+      {
+        "status": 200,
+        "first_token_ms": 2091.543299960904,
+        "box": null,
+        "error": null
+      },
+      {
+        "status": 200,
+        "first_token_ms": 1535.7037999201566,
+        "box": null,
+        "error": null
+      },
+      {
+        "status": 200,
+        "first_token_ms": 918.7459999229759,
+        "box": null,
+        "error": null
+      },
+      {
+        "status": 200,
+        "first_token_ms": 886.6320999804884,
+        "box": null,
+        "error": null
+      },
+      {
+        "status": 200,
+        "first_token_ms": 1037.5719999428838,
+        "box": null,
+        "error": null
+      },
+      {
+        "status": 200,
+        "first_token_ms": 773.4405000228435,
+        "box": null,
+        "error": null
+      }
+    ],
+    "first_token_p50": 918.7459999229759
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "started": 1795680065.2252629,
+  "rows": {
+    "moss": [
+      {
+        "status": 200,
+        "first_token_ms": 679.5353000052273,
+        "error": null
+      },
+      {
+        "status": 200,
+        "first_token_ms": 1039.78560003452,
+        "error": null
+      },
+      {
+        "status": 200,
+        "first_token_ms": 557.6670999871567,
+        "error": null
+      },
+      {
+        "status": 200,
+        "first_token_ms": 847.6558999391273,
+        "error": null
+      },
+      {
+        "status": 200,
+        "first_token_ms": 581.4973999513313,
+        "error": null
+      },
+      {
+        "status": 200,
+        "first_token_ms": 686.6807999322191,
+        "error": null
+      },
+      {
+        "status": 200,
+        "first_token_ms": 916.339399991557,
+        "error": null
+      },
+      {
+        "status": 200,
+        "first_token_ms": 617.3439000267535,
+        "error": null
+      },
+      {
+        "status": 200,
+        "first_token_ms": 582.364600035362,
+        "error": null
+      },
+      {
+        "status": 200,
+        "first_token_ms": 579.7745001036674,
+        "error": null
+      }
+    ],
+    "openrouter": [
+      {
+        "status": 200,
+        "first_token_ms": 43088.64440000616,
+        "total_ms": 43289.9625999853,
+        "provider": "OpenAI",
+        "text": "No, we’re closed on Saturdays and open Monday through Friday, 9 to 5."
+      },
+      {
+        "status": 200,
+        "first_token_ms": 656.9120999192819,
+        "total_ms": 816.2510999245569,
+        "provider": "OpenAI",
+        "text": "We close at 5 p.m. on Friday."
+      },
+      {
+        "status": 200,
+        "first_token_ms": 804.7821000218391,
+        "total_ms": 1110.8030000468716,
+        "provider": "OpenAI",
+        "text": "Yes, I can help with that—what day and time next week would you prefer during our Monday-to-Friday hours of 9 to 5?"
+      },
+      {
+        "status": 200,
+        "first_token_ms": 765.2080999687314,
+        "total_ms": 996.0093999980018,
+        "provider": "OpenAI",
+        "text": "Yes, we accept walk-ins during our opening hours, Monday to Friday from 9 to 5."
+      },
+      {
+        "status": 200,
+        "first_token_ms": 627.2258999524638,
+        "total_ms": 767.8145000245422,
+        "provider": "OpenAI",
+        "text": "We open at 9 a.m., Monday through Friday."
+      },
+      {
+        "status": 200,
+        "first_token_ms": 618.938000057824,
+        "total_ms": 898.0845999903977,
+        "provider": "OpenAI",
+        "text": "No, we’re closed on Sundays; we’re open Monday through Friday, 9 to 5."
+      },
+      {
+        "status": 200,
+        "first_token_ms": 732.1692999685183,
+        "total_ms": 861.7858999641612,
+        "provider": "OpenAI",
+        "text": "I’m sorry, we open at 9, so we can’t see you at 8."
+      },
+      {
+        "status": 200,
+        "first_token_ms": 522.4334000376984,
+        "total_ms": 780.1108000567183,
+        "provider": "OpenAI",
+        "text": "Yes, we’re open Wednesday afternoon until 5 p.m."
+      },
+      {
+        "status": 200,
+        "first_token_ms": 921.8986000632867,
+        "total_ms": 1286.2265000585467,
+        "provider": "OpenAI",
+        "text": "We’re open Monday through Friday, 9 a.m. to 5 p.m."
+      },
+      {
+        "status": 200,
+        "first_token_ms": 812.1733000734821,
+        "total_ms": 977.0740000531077,
+        "provider": "OpenAI",
+        "text": "Certainly—our reception team can help reschedule your appointment Monday to Friday, 9 to 5."
+      }
+    ]
+  },
+  "moss": {
+    "n": 10,
+    "p50": 617.3439000267535,
+    "p90": 916.339399991557,
+    "min": 557.6670999871567,
+    "max": 1039.78560003452
+  },
+  "openrouter": {
+    "n": 10,
+    "p50": 732.1692999685183,
+    "p90": 921.8986000632867,
+    "min": 522.4334000376984,
+    "max": 43088.64440000616
+  }
+}
