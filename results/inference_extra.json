@@ -1,0 +1,454 @@
+{
+  "started": 1795676468.3621173,
+  "network": {
+    "tcp_connect_ms_p50": 42.8,
+    "tls_handshake_ms_p50": 57.5,
+    "peer": "136.69.65.86",
+    "get_models_warm_ms_p50": 136.9
+  },
+  "failures": [],
+  "interleaved": {
+    "summary": {
+      "responses": {
+        "ttfb_ms": {
+          "p50": 191.3,
+          "p95": 203.6
+        },
+        "first_token_ms": {
+          "p50": 192.9,
+          "p95": 205.2
+        },
+        "total_ms": {
+          "p50": 299.3,
+          "p95": 411.0
+        },
+        "deltas_per_reply_p50": 7,
+        "median_gap_ms_p50": 17.3
+      },
+      "chat": {
+        "ttfb_ms": {
+          "p50": 190.3,
+          "p95": 196.2
+        },
+        "first_token_ms": {
+          "p50": 190.4,
+          "p95": 196.3
+        },
+        "total_ms": {
+          "p50": 330.9,
+          "p95": 446.3
+        },
+        "deltas_per_reply_p50": 9,
+        "median_gap_ms_p50": 17.3
+      }
+    },
+    "by_box": {
+      "g904212": {
+        "n": 30,
+        "first_token_p50": 191.0,
+        "max": 205.2
+      }
+    },
+    "rows": [
+      {
+        "api": "responses",
+        "status": 200,
+        "first_token_ms": 199.74100007675588,
+        "total_ms": 262.34300003852695,
+        "ttfb_ms": 198.11660004779696,
+        "box": "g904212",
+        "deltas": 4,
+        "median_gap_ms": 16.599999999999994,
+        "chars": 43
+      },
+      {
+        "api": "chat",
+        "status": 200,
+        "first_token_ms": 194.66599996667355,
+        "total_ms": 259.27559996489435,
+        "ttfb_ms": 194.60099993739277,
+        "box": "g904212",
+        "deltas": 5,
+        "median_gap_ms": 17.200000000000003,
+        "chars": 28
+      },
+      {
+        "api": "responses",
+        "status": 200,
+        "first_token_ms": 190.34089997876436,
+        "total_ms": 329.4543999945745,
+        "ttfb_ms": 188.88440006412566,
+        "box": "g904212",
+        "deltas": 9,
+        "median_gap_ms": 17.19999999999999,
+        "chars": 77
+      },
+      {
+        "api": "chat",
+        "status": 200,
+        "first_token_ms": 196.28079992253333,
+        "total_ms": 337.7360999584198,
+        "ttfb_ms": 196.211599977687,
+        "box": "g904212",
+        "deltas": 7,
+        "median_gap_ms": 16.89999999999999,
+        "chars": 59
+      },
+      {
+        "api": "responses",
+        "status": 200,
+        "first_token_ms": 192.98390008043498,
+        "total_ms": 273.1587999733165,
+        "ttfb_ms": 191.55630003660917,
+        "box": "g904212",
+        "deltas": 5,
+        "median_gap_ms": 17.400000000000006,
+        "chars": 41
+      },
+      {
+        "api": "chat",
+        "status": 200,
+        "first_token_ms": 190.84970001131296,
+        "total_ms": 376.24600005801767,
+        "ttfb_ms": 190.78609999269247,
+        "box": "g904212",
+        "deltas": 12,
+        "median_gap_ms": 17.299999999999983,
+        "chars": 87
+      },
+      {
+        "api": "responses",
+        "status": 200,
+        "first_token_ms": 197.43679999373853,
+        "total_ms": 371.7937000328675,
+        "ttfb_ms": 196.01130008231848,
+        "box": "g904212",
+        "deltas": 10,
+        "median_gap_ms": 17.100000000000023,
+        "chars": 57
+      },
+      {
+        "api": "chat",
+        "status": 200,
+        "first_token_ms": 190.70279994048178,
+        "total_ms": 358.7828999152407,
+        "ttfb_ms": 190.64149993937463,
+        "box": "g904212",
+        "deltas": 11,
+        "median_gap_ms": 17.200000000000003,
+        "chars": 65
+      },
+      {
+        "api": "responses",
+        "status": 200,
+        "first_token_ms": 190.74930006172508,
+        "total_ms": 287.3056000098586,
+        "ttfb_ms": 188.97450005169958,
+        "box": "g904212",
+        "deltas": 7,
+        "median_gap_ms": 17.349999999999994,
+        "chars": 52
+      },
+      {
+        "api": "chat",
+        "status": 200,
+        "first_token_ms": 188.6842999374494,
+        "total_ms": 356.6163999494165,
+        "ttfb_ms": 188.6330998968333,
+        "box": "g904212",
+        "deltas": 11,
+        "median_gap_ms": 17.19999999999999,
+        "chars": 117
+      },
+      {
+        "api": "responses",
+        "status": 200,
+        "first_token_ms": 190.94539992511272,
+        "total_ms": 305.7477999245748,
+        "ttfb_ms": 189.2546999733895,
+        "box": "g904212",
+        "deltas": 7,
+        "median_gap_ms": 16.849999999999994,
+        "chars": 36
+      },
+      {
+        "api": "chat",
+        "status": 200,
+        "first_token_ms": 189.71049995161593,
+        "total_ms": 305.5762998992577,
+        "ttfb_ms": 189.64749993756413,
+        "box": "g904212",
+        "deltas": 7,
+        "median_gap_ms": 17.200000000000003,
+        "chars": 53
+      },
+      {
+        "api": "responses",
+        "status": 200,
+        "first_token_ms": 192.88449990563095,
+        "total_ms": 254.0864999173209,
+        "ttfb_ms": 191.71019992791116,
+        "box": "g904212",
+        "deltas": 4,
+        "median_gap_ms": 17.400000000000006,
+        "chars": 43
+      },
+      {
+        "api": "chat",
+        "status": 200,
+        "first_token_ms": 190.43740001507103,
+        "total_ms": 330.8556000702083,
+        "ttfb_ms": 190.36810006946325,
+        "box": "g904212",
+        "deltas": 8,
+        "median_gap_ms": 17.30000000000001,
+        "chars": 41
+      },
+      {
+        "api": "responses",
+        "status": 200,
+        "first_token_ms": 192.15970009099692,
+        "total_ms": 411.0335001023486,
+        "ttfb_ms": 190.53800008259714,
+        "box": "g904212",
+        "deltas": 13,
+        "median_gap_ms": 17.299999999999983,
+        "chars": 111
+      },
+      {
+        "api": "chat",
+        "status": 200,
+        "first_token_ms": 189.98269992880523,
+        "total_ms": 323.5447999322787,
+        "ttfb_ms": 189.92359994444996,
+        "box": "g904212",
+        "deltas": 9,
+        "median_gap_ms": 17.299999999999997,
+        "chars": 53
+      },
+      {
+        "api": "responses",
+        "status": 200,
+        "first_token_ms": 191.74559996463358,
+        "total_ms": 314.8428000276908,
+        "ttfb_ms": 190.7375999726355,
+        "box": "g904212",
+        "deltas": 8,
+        "median_gap_ms": 17.80000000000001,
+        "chars": 53
+      },
+      {
+        "api": "chat",
+        "status": 200,
+        "first_token_ms": 194.53159999102354,
+        "total_ms": 275.81779996398836,
+        "ttfb_ms": 194.4676999701187,
+        "box": "g904212",
+        "deltas": 6,
+        "median_gap_ms": 17.400000000000006,
+        "chars": 39
+      },
+      {
+        "api": "responses",
+        "status": 200,
+        "first_token_ms": 192.901499918662,
+        "total_ms": 271.77989995107055,
+        "ttfb_ms": 191.34369993116707,
+        "box": "g904212",
+        "deltas": 6,
+        "median_gap_ms": 17.100000000000023,
+        "chars": 41
+      },
+      {
+        "api": "chat",
+        "status": 200,
+        "first_token_ms": 191.24569999985397,
+        "total_ms": 358.29020000528544,
+        "ttfb_ms": 191.17870007175952,
+        "box": "g904212",
+        "deltas": 10,
+        "median_gap_ms": 17.600000000000023,
+        "chars": 56
+      },
+      {
+        "api": "responses",
+        "status": 200,
+        "first_token_ms": 191.03360001463443,
+        "total_ms": 321.99249998666346,
+        "ttfb_ms": 189.40360005944967,
+        "box": "g904212",
+        "deltas": 9,
+        "median_gap_ms": 17.200000000000003,
+        "chars": 51
+      },
+      {
+        "api": "chat",
+        "status": 200,
+        "first_token_ms": 189.33980003930628,
+        "total_ms": 253.70190001558512,
+        "ttfb_ms": 189.28020005114377,
+        "box": "g904212",
+        "deltas": 5,
+        "median_gap_ms": 16.85000000000001,
+        "chars": 28
+      },
+      {
+        "api": "responses",
+        "status": 200,
+        "first_token_ms": 191.47899991367012,
+        "total_ms": 375.75849995482713,
+        "ttfb_ms": 190.3342999285087,
+        "box": "g904212",
+        "deltas": 12,
+        "median_gap_ms": 17.400000000000034,
+        "chars": 105
+      },
+      {
+        "api": "chat",
+        "status": 200,
+        "first_token_ms": 190.35659998189658,
+        "total_ms": 446.297200047411,
+        "ttfb_ms": 190.28640002943575,
+        "box": "g904212",
+        "deltas": 16,
+        "median_gap_ms": 17.400000000000006,
+        "chars": 141
+      },
+      {
+        "api": "responses",
+        "status": 200,
+        "first_token_ms": 205.17989993095398,
+        "total_ms": 272.20699994359165,
+        "ttfb_ms": 203.62779998686165,
+        "box": "g904212",
+        "deltas": 6,
+        "median_gap_ms": 15.700000000000017,
+        "chars": 39
+      },
+      {
+        "api": "chat",
+        "status": 200,
+        "first_token_ms": 189.72110003232956,
+        "total_ms": 340.62979998998344,
+        "ttfb_ms": 189.647400053218,
+        "box": "g904212",
+        "deltas": 10,
+        "median_gap_ms": 17.30000000000001,
+        "chars": 66
+      },
+      {
+        "api": "responses",
+        "status": 200,
+        "first_token_ms": 201.61089999601245,
+        "total_ms": 299.3082000175491,
+        "ttfb_ms": 199.90580005105585,
+        "box": "g904212",
+        "deltas": 6,
+        "median_gap_ms": 17.5,
+        "chars": 36
+      },
+      {
+        "api": "chat",
+        "status": 200,
+        "first_token_ms": 190.2346999850124,
+        "total_ms": 288.7931999284774,
+        "ttfb_ms": 190.1722999755293,
+        "box": "g904212",
+        "deltas": 7,
+        "median_gap_ms": 17.250000000000014,
+        "chars": 51
+      },
+      {
+        "api": "responses",
+        "status": 200,
+        "first_token_ms": 195.87729999329895,
+        "total_ms": 293.8703999388963,
+        "ttfb_ms": 194.17099992278963,
+        "box": "g904212",
+        "deltas": 6,
+        "median_gap_ms": 17.400000000000006,
+        "chars": 53
+      },
+      {
+        "api": "chat",
+        "status": 200,
+        "first_token_ms": 187.6359999878332,
+        "total_ms": 320.86470001377165,
+        "ttfb_ms": 187.57369997911155,
+        "box": "g904212",
+        "deltas": 9,
+        "median_gap_ms": 17.24999999999997,
+        "chars": 76
+      }
+    ]
+  },
+  "prefix_cache": [
+    {
+      "i": 0,
+      "first_token_ms": 209.6040000906214,
+      "prompt_tokens": 3204,
+      "cached_tokens": 3200,
+      "box": "g904212"
+    },
+    {
+      "i": 1,
+      "first_token_ms": 209.9387999624014,
+      "prompt_tokens": 3206,
+      "cached_tokens": 3200,
+      "box": "g904212"
+    },
+    {
+      "i": 2,
+      "first_token_ms": 203.98230000864714,
+      "prompt_tokens": 3206,
+      "cached_tokens": 3200,
+      "box": "g904212"
+    },
+    {
+      "i": 3,
+      "first_token_ms": 210.15960001386702,
+      "prompt_tokens": 3204,
+      "cached_tokens": 3200,
+      "box": "g904212"
+    },
+    {
+      "i": 4,
+      "first_token_ms": 206.78229990880936,
+      "prompt_tokens": 3204,
+      "cached_tokens": 3200,
+      "box": "g904212"
+    },
+    {
+      "i": 5,
+      "first_token_ms": 218.2546000694856,
+      "prompt_tokens": 3205,
+      "cached_tokens": 3200,
+      "box": "g904212"
+    }
+  ],
+  "concurrent5": {
+    "first_token_ms": [
+      340.9,
+      343.9,
+      347.6,
+      625.1,
+      627.7
+    ],
+    "statuses": [
+      200,
+      200,
+      200,
+      200,
+      200
+    ],
+    "boxes": [
+      "g904212",
+      "g904212",
+      "g904212",
+      "g904212",
+      "g904212"
+    ],
+    "note": "includes a new TCP+TLS connection per call"
+  },
+  "finished": 1795676515.9809294
+}

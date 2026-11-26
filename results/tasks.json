@@ -1,0 +1,658 @@
+{
+  "started": 1795676751.9481308,
+  "caps_usd": 1.41,
+  "validation": [
+    {
+      "probe": "missing goal",
+      "want_status": 400,
+      "got_status": 400,
+      "code": "invalid_request_error",
+      "type": "invalid_request_error",
+      "message": "goal must be text of 1 to 20000 characters",
+      "ok": true
+    },
+    {
+      "probe": "environment.type desktop",
+      "want_status": 400,
+      "got_status": 400,
+      "code": "invalid_request_error",
+      "type": "invalid_request_error",
+      "message": "environment must be {\"type\": \"browser\"}; v0 runs browser tasks only",
+      "ok": true
+    },
+    {
+      "probe": "start_url ftp",
+      "want_status": 400,
+      "got_status": 400,
+      "code": "invalid_request_error",
+      "type": "invalid_request_error",
+      "message": "environment.start_url must be an http or https URL, or a host such as example.com",
+      "ok": true
+    },
+    {
+      "probe": "max_cost_usd 0.001",
+      "want_status": 400,
+      "got_status": 400,
+      "code": "invalid_request_error",
+      "type": "invalid_request_error",
+      "message": "limits.max_cost_usd must be a number from 0.01 to 50",
+      "ok": true
+    },
+    {
+      "probe": "max_cost_usd 100",
+      "want_status": 400,
+      "got_status": 400,
+      "code": "invalid_request_error",
+      "type": "invalid_request_error",
+      "message": "limits.max_cost_usd must be a number from 0.01 to 50",
+      "ok": true
+    },
+    {
+      "probe": "max_runtime_seconds 30",
+      "want_status": 400,
+      "got_status": 400,
+      "code": "invalid_request_error",
+      "type": "invalid_request_error",
+      "message": "limits.max_runtime_seconds must be a number from 60 to 7200",
+      "ok": true
+    },
+    {
+      "probe": "max_runtime_seconds 9000",
+      "want_status": 400,
+      "got_status": 400,
+      "code": "invalid_request_error",
+      "type": "invalid_request_error",
+      "message": "limits.max_runtime_seconds must be a number from 60 to 7200",
+      "ok": true
+    },
+    {
+      "probe": "unknown top-level field",
+      "want_status": 400,
+      "got_status": 400,
+      "code": "invalid_request_error",
+      "type": "invalid_request_error",
+      "message": "Unknown field priority",
+      "ok": true
+    },
+    {
+      "probe": "output_schema type array",
+      "want_status": 400,
+      "got_status": 400,
+      "code": "invalid_request_error",
+      "type": "invalid_request_error",
+      "message": "output_schema must describe one JSON object: its \"type\" must be \"object\". For a list, put it in a property, such as {\"type\": \"object\", \"properties\": {\"items\": {\"type\": \"array\"}}}",
+      "ok": true
+    },
+    {
+      "probe": "unknown model",
+      "want_status": 400,
+      "got_status": 400,
+      "code": "model_not_found",
+      "type": "invalid_request_error",
+      "message": "model must be a Moss tier or a Moss catalog model that tasks serve: moss-advanced, moss-balanced, moss-balanced-handoff, moss-fast, moss-fast-beta, anthropic/claude-fable-5.1, anthropic/claude-haiku-5.5, anthropic/claude-opus-5.5, anthropic/claude-sonnet-5.5, deepseek/deepseek-v4.1-flash, deepseek/deepseek-v4.1-flash-1017, google/gemini-3.5-flash-lite, google/gemini-3.8-flash, google/gemini-4-argon, minimax/minimax-m3.1-flash, moonshotai/kimi-k3, openai/gpt-6-astra, openai/gpt-6-luna, openai/gpt-6.1-sol, openai/gpt-6.1-terra, qwen/qwen3.8-flash, z-ai/glm-5.3, z-ai/glm-5.3-flash",
+      "ok": true
+    },
+    {
+      "probe": "effort extreme",
+      "want_status": 400,
+      "got_status": 400,
+      "code": "invalid_request_error",
+      "type": "invalid_request_error",
+      "message": "effort must be low, medium or high",
+      "ok": true
+    },
+    {
+      "probe": "goal 20,001 chars",
+      "want_status": 400,
+      "got_status": 400,
+      "code": "invalid_request_error",
+      "type": "invalid_request_error",
+      "message": "goal must be text of 1 to 20000 characters",
+      "ok": true
+    },
+    {
+      "probe": "metadata 5 KB",
+      "want_status": 400,
+      "got_status": 400,
+      "code": "invalid_request_error",
+      "type": "invalid_request_error",
+      "message": "metadata must be an object under 4000 bytes",
+      "ok": true
+    },
+    {
+      "probe": "limits as string",
+      "want_status": 400,
+      "got_status": 400,
+      "code": "invalid_request_error",
+      "type": "invalid_request_error",
+      "message": "limits takes max_runtime_seconds and max_cost_usd",
+      "ok": true
+    },
+    {
+      "probe": "empty goal",
+      "want_status": 400,
+      "got_status": 400,
+      "code": "invalid_request_error",
+      "type": "invalid_request_error",
+      "message": "goal must be text of 1 to 20000 characters",
+      "ok": true
+    },
+    {
+      "probe": "get unknown task",
+      "want_status": 404,
+      "got_status": 404,
+      "code": "not_found_error",
+      "type": "not_found_error",
+      "message": "No task with this id in this project",
+      "ok": true
+    },
+    {
+      "probe": "cancel unknown task",
+      "want_status": 404,
+      "got_status": 404,
+      "code": "not_found_error",
+      "type": "not_found_error",
+      "message": "No task with this id in this project",
+      "ok": true
+    },
+    {
+      "probe": "get malformed id",
+      "want_status": 404,
+      "got_status": 404,
+      "code": "not_found_error",
+      "type": "not_found_error",
+      "message": "No task with this id in this project",
+      "ok": true
+    }
+  ],
+  "created": {
+    "K1 example.com heading": {
+      "http": 202,
+      "body_status": "queued",
+      "ms": 252.2
+    },
+    "K2 value from the Moss docs": {
+      "http": 202,
+      "body_status": "queued",
+      "ms": 254.4
+    },
+    "K3 top 5 Hacker News stories": {
+      "http": 202,
+      "body_status": "queued",
+      "ms": 245.7
+    },
+    "F1 missing data": {
+      "http": 202,
+      "body_status": "queued",
+      "ms": 152.6
+    },
+    "F2 dead URL": {
+      "http": 202,
+      "body_status": "queued",
+      "ms": 146.5
+    },
+    "F3 $0.01 budget": {
+      "http": 202,
+      "body_status": "queued",
+      "ms": 178.6
+    },
+    "F4 60 s time limit": {
+      "http": 202,
+      "body_status": "queued",
+      "ms": 163.3
+    }
+  },
+  "idempotency": {
+    "first_status": 202,
+    "replay_status": 202,
+    "same_id": true,
+    "replay_header": "true",
+    "conflict_status": 422,
+    "conflict_code": "idempotency_key_reused"
+  },
+  "cancel": {
+    "queued": {
+      "status_at_create": "queued",
+      "cancel_http": 200,
+      "status_after_cancel": "running",
+      "cancel_requested": true
+    },
+    "running": {
+      "status_when_cancelled": "running",
+      "cancel_http": 200,
+      "returned_status": "running",
+      "cancel_requested": true,
+      "cancel_sent_at": 1795676911.635017,
+      "final_status": "cancelled",
+      "seconds_to_cancelled": 0.5,
+      "billed": {
+        "model_usd": 0.000113,
+        "total_usd": 0.000446,
+        "browser_usd": 0.0003333333333333333,
+        "traffic_usd": null
+      },
+      "cancel_again_http": 200
+    },
+    "files_before_finish": {
+      "status": 409,
+      "code": "task_not_finished"
+    }
+  },
+  "hn_truth": [
+    [
+      "Holy shit holy shit holy shit holy shit: The magnitude of what’s now happening",
+      "1Password Security Incident",
+      "Lions' Commentary on Unix: Why It Was Secretly Copied for 20 Years",
+      "Much shorter version of GRH Lean verification from Anthropic",
+      "Tell HN: Lots of Ask HNs again"
+    ],
+    [
+      "Holy shit holy shit holy shit holy shit: The magnitude of what’s now happening",
+      "1Password Security Incident",
+      "Lions' Commentary on Unix: Why It Was Secretly Copied for 20 Years",
+      "Much shorter version of GRH Lean verification from Anthropic",
+      "Minipg: PostgreSQL as a Single Executable"
+    ]
+  ],
+  "tasks": [
+    {
+      "label": "K1 example.com heading",
+      "id": "task_2f71a4402bb048c29b60305c2f2d98ed",
+      "model": "moss-fast",
+      "status": "completed",
+      "error": null,
+      "cap_usd": 0.2,
+      "runtime_cap_s": 300,
+      "cost": {
+        "model_usd": 0.004873,
+        "total_usd": 0.005206,
+        "browser_usd": 0.0003333333333333333,
+        "traffic_usd": null
+      },
+      "usage": {
+        "model_calls": 4,
+        "steps": 3,
+        "input_tokens": 24336,
+        "output_tokens": 1002,
+        "browser_seconds": 18,
+        "browser_traffic_mb": null
+      },
+      "queue_s": 0.0,
+      "run_s": 18.3,
+      "output_text": "{\"heading\":\"\"}",
+      "output": {
+        "heading": ""
+      },
+      "verification": {
+        "method": "output_schema",
+        "passed": true
+      },
+      "kind": "known",
+      "expect": "Example Domain",
+      "grade": {
+        "status": "completed",
+        "error_code": null,
+        "verification_passed": true,
+        "correct": false
+      }
+    },
+    {
+      "label": "K2 value from the Moss docs",
+      "id": "task_c8ccf6395ab3415eabb8cb36af05366e",
+      "model": "moss-fast",
+      "status": "completed",
+      "error": null,
+      "cap_usd": 0.2,
+      "runtime_cap_s": 300,
+      "cost": {
+        "model_usd": 0.006722,
+        "total_usd": 0.007055,
+        "browser_usd": 0.0003333333333333333,
+        "traffic_usd": null
+      },
+      "usage": {
+        "model_calls": 3,
+        "steps": 2,
+        "input_tokens": 13138,
+        "output_tokens": 795,
+        "browser_seconds": 20,
+        "browser_traffic_mb": null
+      },
+      "queue_s": 0.0,
+      "run_s": 20.1,
+      "output_text": "{\"price_usd_per_million\":1.75}",
+      "output": {
+        "price_usd_per_million": 1.75
+      },
+      "verification": {
+        "method": "output_schema",
+        "passed": true
+      },
+      "kind": "known",
+      "expect": 1.75,
+      "grade": {
+        "status": "completed",
+        "error_code": null,
+        "verification_passed": true,
+        "correct": true
+      }
+    },
+    {
+      "label": "K3 top 5 Hacker News stories",
+      "id": "task_5e3ae94a50b949ad88479ada1f101db0",
+      "model": "moss-balanced",
+      "status": "completed",
+      "error": null,
+      "cap_usd": 0.3,
+      "runtime_cap_s": 300,
+      "cost": {
+        "model_usd": 0.057353,
+        "total_usd": 0.057686,
+        "browser_usd": 0.0003333333333333333,
+        "traffic_usd": null
+      },
+      "usage": {
+        "model_calls": 4,
+        "steps": 3,
+        "input_tokens": 46521,
+        "output_tokens": 463,
+        "browser_seconds": 19,
+        "browser_traffic_mb": null
+      },
+      "queue_s": 0.0,
+      "run_s": 20.0,
+      "output_text": "{\"titles\":[\"Holy shit holy shit holy shit holy shit: The magnitude of what’s now happening\",\"1Password Security Incident\",\"Lions' Commentary on Unix: Why It Was Secretly Copied for 20 Years\",\"Much shorter version of GRH Lean verification from Anthropic\",\"Minipg: PostgreSQL as a Single Executable\"]}",
+      "output": {
+        "titles": [
+          "Holy shit holy shit holy shit holy shit: The magnitude of what’s now happening",
+          "1Password Security Incident",
+          "Lions' Commentary on Unix: Why It Was Secretly Copied for 20 Years",
+          "Much shorter version of GRH Lean verification from Anthropic",
+          "Minipg: PostgreSQL as a Single Executable"
+        ]
+      },
+      "verification": {
+        "method": "output_schema",
+        "passed": true
+      },
+      "kind": "known",
+      "expect": "hn_top5",
+      "grade": {
+        "status": "completed",
+        "error_code": null,
+        "verification_passed": true,
+        "in_order_matches": 5,
+        "set_overlap": 5,
+        "correct": true
+      }
+    },
+    {
+      "label": "CANCEL-0",
+      "id": "task_24479e7f6a4e4627bf0357de2a933e28",
+      "model": "moss-fast",
+      "status": "cancelled",
+      "error": null,
+      "cap_usd": 0.05,
+      "runtime_cap_s": 120,
+      "cost": {
+        "model_usd": 0.0,
+        "total_usd": 0.000333,
+        "browser_usd": 0.0003333333333333333,
+        "traffic_usd": null
+      },
+      "usage": {
+        "model_calls": 0,
+        "steps": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "browser_seconds": 2,
+        "browser_traffic_mb": null
+      },
+      "queue_s": 0.0,
+      "run_s": 2.9,
+      "output_text": "",
+      "output": null,
+      "verification": null
+    },
+    {
+      "label": "CANCEL-1",
+      "id": "task_cfa7d67dd4c24382ba5f25f0783c9320",
+      "model": "moss-fast",
+      "status": "cancelled",
+      "error": null,
+      "cap_usd": 0.1,
+      "runtime_cap_s": 600,
+      "cost": {
+        "model_usd": 0.000113,
+        "total_usd": 0.000446,
+        "browser_usd": 0.0003333333333333333,
+        "traffic_usd": null
+      },
+      "usage": {
+        "model_calls": 1,
+        "steps": 0,
+        "input_tokens": 769,
+        "output_tokens": 35,
+        "browser_seconds": 18,
+        "browser_traffic_mb": null
+      },
+      "queue_s": 0.0,
+      "run_s": 18.8,
+      "output_text": "",
+      "output": null,
+      "verification": null
+    },
+    {
+      "label": "IDEM",
+      "id": "task_9aae379bb4fc4918a6b0c9bea30b51ec",
+      "model": "moss-fast",
+      "status": "completed",
+      "error": null,
+      "cap_usd": 0.05,
+      "runtime_cap_s": 120,
+      "cost": {
+        "model_usd": 0.006591,
+        "total_usd": 0.006924,
+        "browser_usd": 0.0003333333333333333,
+        "traffic_usd": null
+      },
+      "usage": {
+        "model_calls": 6,
+        "steps": 5,
+        "input_tokens": 56570,
+        "output_tokens": 1102,
+        "browser_seconds": 27,
+        "browser_traffic_mb": null
+      },
+      "queue_s": 0.0,
+      "run_s": 27.0,
+      "output_text": "The page title is **Example Domain**.",
+      "output": null,
+      "verification": {
+        "method": "agent_reported",
+        "passed": null
+      }
+    },
+    {
+      "label": "F1 missing data",
+      "id": "task_51c9ccce9c714ca7b54912843a9a7f0a",
+      "model": "moss-fast",
+      "status": "completed",
+      "error": null,
+      "cap_usd": 0.15,
+      "runtime_cap_s": 300,
+      "cost": {
+        "model_usd": 0.0082,
+        "total_usd": 0.008533,
+        "browser_usd": 0.0003333333333333333,
+        "traffic_usd": null
+      },
+      "usage": {
+        "model_calls": 10,
+        "steps": 9,
+        "input_tokens": 91344,
+        "output_tokens": 2127,
+        "browser_seconds": 43,
+        "browser_traffic_mb": null
+      },
+      "queue_s": 0.0,
+      "run_s": 44.3,
+      "output_text": "{\"phone\":\"\"}",
+      "output": {
+        "phone": ""
+      },
+      "verification": {
+        "method": "output_schema",
+        "passed": true
+      },
+      "kind": "fail",
+      "expect": "no answer, or an answer that says it is not there",
+      "grade": {
+        "status": "completed",
+        "error_code": null,
+        "verification_passed": true,
+        "hallucinated": false,
+        "behaved": true
+      }
+    },
+    {
+      "label": "F3 $0.01 budget",
+      "id": "task_8e6dfdf8405741ca9f0e0b9d7fa80df6",
+      "model": "moss-fast",
+      "status": "failed",
+      "error": {
+        "code": "budget_exceeded",
+        "message": "Spent $0.01"
+      },
+      "cap_usd": 0.01,
+      "runtime_cap_s": 300,
+      "cost": {
+        "model_usd": 0.010337,
+        "total_usd": 0.01067,
+        "browser_usd": 0.0003333333333333333,
+        "traffic_usd": null
+      },
+      "usage": {
+        "model_calls": 9,
+        "steps": 2,
+        "input_tokens": 35557,
+        "output_tokens": 1923,
+        "browser_seconds": 44,
+        "browser_traffic_mb": null
+      },
+      "queue_s": 0.0,
+      "run_s": 44.4,
+      "output_text": "",
+      "output": null,
+      "verification": null,
+      "kind": "fail",
+      "expect": "budget_exceeded, cost close to $0.01",
+      "grade": {
+        "status": "failed",
+        "error_code": "budget_exceeded",
+        "verification_passed": null,
+        "behaved": true
+      }
+    },
+    {
+      "label": "F2 dead URL",
+      "id": "task_efb1eb3884d2415bb54188499751de3e",
+      "model": "moss-fast",
+      "status": "completed",
+      "error": null,
+      "cap_usd": 0.15,
+      "runtime_cap_s": 300,
+      "cost": {
+        "model_usd": 0.008613,
+        "total_usd": 0.008946,
+        "browser_usd": 0.0003333333333333333,
+        "traffic_usd": null
+      },
+      "usage": {
+        "model_calls": 8,
+        "steps": 4,
+        "input_tokens": 40813,
+        "output_tokens": 2152,
+        "browser_seconds": 49,
+        "browser_traffic_mb": null
+      },
+      "queue_s": 0.0,
+      "run_s": 50.2,
+      "output_text": "I couldn’t retrieve the shop’s opening hours. The supplied page failed on both attempts with `ERR_SOCKS_CONNECTION_FAILED` and showed no shop identity or hours: https://moss-work-sample-dead-host.invalid/hours.",
+      "output": null,
+      "verification": {
+        "method": "agent_reported",
+        "passed": null
+      },
+      "kind": "fail",
+      "expect": "fails or says the page could not be reached",
+      "grade": {
+        "status": "completed",
+        "error_code": null,
+        "verification_passed": null,
+        "behaved": true
+      }
+    },
+    {
+      "label": "F4 60 s time limit",
+      "id": "task_b039282de7974df09b508c51d892e3e6",
+      "model": "moss-fast",
+      "status": "completed",
+      "error": null,
+      "cap_usd": 0.2,
+      "runtime_cap_s": 60,
+      "cost": {
+        "model_usd": 0.012871,
+        "total_usd": 0.013204,
+        "browser_usd": 0.0003333333333333333,
+        "traffic_usd": null
+      },
+      "usage": {
+        "model_calls": 6,
+        "steps": 5,
+        "input_tokens": 43332,
+        "output_tokens": 5105,
+        "browser_seconds": 56,
+        "browser_traffic_mb": null
+      },
+      "queue_s": 0.0,
+      "run_s": 56.4,
+      "output_text": "| Title | Comment count |\n|---|---:|\n| [Holy shit holy shit holy shit holy shit: The magnitude of what’s now happening](https://news.ycombinator.com/item?id=50646108) | 1,148 |\n| [1Password Security Incident](https://news.ycombinator.com/item?id=50644817) | 563 |\n| [Lions' Commentary on Unix: Why It Was Secretly Copied for 20 Years](https://news.ycombinator.com/item?id=50651719) | 2 |\n| [Much shorter version of GRH Lean verification from Anthropic](https://news.ycombinator.com/item?id=50648050) | 206 |\n| [Minipg: PostgreSQL as a Single Executable](https://news.ycombinator.com/item?id=50650892) | 10 |\n| [Tell HN: Lots of Ask HNs again](https://news.ycombinator.com/item?id=50649864) | 83 |\n| [Collection of preserved UI style guides](https://news.ycombinator.com/item?id=50649834) | 11 |\n| [What VP ≠ VNP Means (In 3 Minutes)](https://news.ycombinator.com/item?id=50626466) | 16 |\n| [Slow Ubuntu security response times](https://news.ycombinator.com/item?id=50647181) | 108 |\n| [GPT-6.2 Astra is the first model to beat Googlers' code golf records](https://news.ycombinator.com/item?id=50601280) | 92 |\n| [The Great Automatic Grammatizator (By Roald Dahl), 1954 [pdf]](https://news.ycombinator.com/item?id=50598636) | 16 |\n| [A few questions for the guy who went snorkeling in a Home Depot retention pond](https://news.ycombinator.com/item?id=50643129) | 113 |\n| [OpenAI cuts GPT-6.2 usage: Astra hits limits 40% faster, Sol 25% faster](https://news.ycombinator.com/item?id=50651117) | 78 |\n| ",
+      "output": null,
+      "verification": {
+        "method": "agent_reported",
+        "passed": null
+      },
+      "kind": "fail",
+      "expect": "time_limit after ~60 s",
+      "grade": {
+        "status": "completed",
+        "error_code": null,
+        "verification_passed": null,
+        "behaved": false
+      }
+    }
+  ],
+  "total_cost_usd": 0.119,
+  "cancel_finished": {
+    "http": 200,
+    "status": "completed"
+  },
+  "files": {
+    "http": 200,
+    "count": 2,
+    "items": [
+      {
+        "path": "screenshots/runner/00001-step-2.png",
+        "bytes": 78571
+      },
+      {
+        "path": "screenshots/runner/00002-step-4.png",
+        "bytes": 78571
+      }
+    ],
+    "first_download_http": 200
+  },
+  "unfinished": [],
+  "finished_at": 1795677078.6522346
+}

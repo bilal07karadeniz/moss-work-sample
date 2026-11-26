@@ -1,0 +1,315 @@
+{
+  "started": 1795676391.0390842,
+  "models_status": 200,
+  "models": [
+    "moss/fastlane-1",
+    "openai/gpt-6-luna",
+    "openai/gpt-6.1-terra",
+    "openai/gpt-6.1-sol",
+    "openai/gpt-6-astra",
+    "anthropic/claude-haiku-5.5",
+    "anthropic/claude-sonnet-5.5",
+    "anthropic/claude-opus-5.5",
+    "anthropic/claude-fable-5.1",
+    "google/gemini-3.8-flash",
+    "google/gemini-3.5-flash-lite",
+    "google/gemini-4-argon",
+    "z-ai/glm-5.3",
+    "moonshotai/kimi-k3",
+    "deepseek/deepseek-v4.1-flash",
+    "qwen/qwen3.8-flash",
+    "deepseek/deepseek-v4.1-flash-1017",
+    "z-ai/glm-5.3-flash",
+    "minimax/minimax-m3.1-flash"
+  ],
+  "latency": [
+    {
+      "name": "responses stream (warm conn)",
+      "metric": "first_token_ms",
+      "n": 20,
+      "errors": 0,
+      "p50": 191.9,
+      "p95": 211.0,
+      "min": 187.9,
+      "max": 487.1,
+      "mean": 208.3
+    },
+    {
+      "name": "responses stream (warm conn)",
+      "metric": "total_ms",
+      "n": 20,
+      "errors": 0,
+      "p50": 331.9,
+      "p95": 392.4,
+      "min": 253.3,
+      "max": 583.3,
+      "mean": 334.3
+    },
+    {
+      "name": "responses stream (new conn each)",
+      "metric": "first_token_ms",
+      "n": 5,
+      "errors": 0,
+      "p50": 300.0,
+      "p95": 317.2,
+      "min": 286.4,
+      "max": 317.2,
+      "mean": 300.3
+    },
+    {
+      "name": "responses blocking (full reply)",
+      "metric": "total_ms",
+      "n": 20,
+      "errors": 0,
+      "p50": 296.5,
+      "p95": 360.3,
+      "min": 258.5,
+      "max": 361.0,
+      "mean": 304.0
+    },
+    {
+      "name": "chat/completions stream (warm conn)",
+      "metric": "first_token_ms",
+      "n": 20,
+      "errors": 0,
+      "p50": 190.8,
+      "p95": 194.4,
+      "min": 188.0,
+      "max": 201.5,
+      "mean": 191.1
+    },
+    {
+      "name": "chat/completions stream (warm conn)",
+      "metric": "total_ms",
+      "n": 20,
+      "errors": 0,
+      "p50": 322.7,
+      "p95": 428.1,
+      "min": 254.6,
+      "max": 445.7,
+      "mean": 330.5
+    }
+  ],
+  "reply_cache": {
+    "first_ms": 141.7,
+    "repeat_ms": 141.4,
+    "first_usage": {
+      "total_tokens": 11,
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "cached_tokens": 0
+      },
+      "output_tokens": 11,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      }
+    },
+    "repeat_usage": {
+      "total_tokens": 11,
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "cached_tokens": 0
+      },
+      "output_tokens": 11,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      }
+    },
+    "same_text": true
+  },
+  "grounding": {
+    "index": null,
+    "unknown_index_status": 403,
+    "unknown_index_error": {
+      "error": {
+        "message": "X-Moss-Indexes names an index outside this project",
+        "type": "permission_error",
+        "code": "permission_error",
+        "request_id": "2ee0b251d68c44cebe6904a2a6d9148f"
+      }
+    }
+  },
+  "tools": {
+    "responses_call_status": 200,
+    "responses_call_ms": 438.8,
+    "responses_function_calls": [
+      {
+        "name": "lookup_appointment",
+        "arguments": "{\"phone\": \"555-0142\"}"
+      }
+    ],
+    "responses_answer": "Your next appointment is with Dr. Aydin on Thursday, December 3rd, at 2:30 PM.",
+    "responses_answer_ms": 380.7,
+    "responses_answer_status": 200,
+    "answer_mentions_time": true,
+    "responses_answer_stream_first_token_ms": 233.8848999934271,
+    "no_tools_resent_status": 200,
+    "no_tools_resent_body": "Your next appointment is on Thursday, December 3rd at 2:30 PM with Dr. Aydin.",
+    "chat_call_status": 200,
+    "chat_tool_calls": [
+      {
+        "name": "lookup_appointment",
+        "arguments": "{\"phone\": \"555-0142\"}"
+      }
+    ],
+    "chat_answer": "Your next appointment is with Dr. Aydin on Thursday, December 3rd at 2:30 PM.",
+    "chat_answer_ms": 380.9
+  },
+  "probes": [
+    {
+      "probe": "previous_response_id",
+      "want_status": 400,
+      "got_status": 400,
+      "want_code": "unsupported_parameter",
+      "got_code": "unsupported_parameter",
+      "message": "previous_response_id is not supported. Send the whole conversation in input.",
+      "request_id": "ccec899d7b4c4f9287f72471083123ca",
+      "x_should_retry": null,
+      "ok": true
+    },
+    {
+      "probe": "unknown model",
+      "want_status": 400,
+      "got_status": 400,
+      "want_code": "model_not_found",
+      "got_code": "model_not_found",
+      "message": "Unknown model moss/does-not-exist. Send model moss/fastlane-1, or a vendor model name with your own key in X-Moss-Provider-Key.",
+      "request_id": "8c20b3eb131b41ff8c0874343d53e11f",
+      "x_should_retry": null,
+      "ok": true
+    },
+    {
+      "probe": "vendor name without own key",
+      "want_status": 400,
+      "got_status": 400,
+      "want_code": "missing_provider_key",
+      "got_code": "missing_provider_key",
+      "message": "Model gpt-6-luna runs on your own openai key. Send the key in the X-Moss-Provider-Key header, or send model moss/fastlane-1.",
+      "request_id": "3b0148b4c6b1457ebd72fb520f102030",
+      "x_should_retry": null,
+      "ok": true
+    },
+    {
+      "probe": "unknown top-level field",
+      "want_status": 400,
+      "got_status": 400,
+      "want_code": "unsupported_parameter",
+      "got_code": "unsupported_parameter",
+      "message": "max_tool_calls is not supported",
+      "request_id": "6ad2400560a24e9da82bb8aace9c1ffd",
+      "x_should_retry": null,
+      "ok": true
+    },
+    {
+      "probe": "built-in tool web_search",
+      "want_status": 400,
+      "got_status": 400,
+      "want_code": "unsupported_parameter",
+      "got_code": "unsupported_parameter",
+      "message": "tools[0] of type web_search is not supported",
+      "request_id": "4b159009bf0c43fdae31359212e4519b",
+      "x_should_retry": null,
+      "ok": true
+    },
+    {
+      "probe": "background true",
+      "want_status": 400,
+      "got_status": 400,
+      "want_code": "unsupported_parameter",
+      "got_code": "unsupported_parameter",
+      "message": "background true is not supported",
+      "request_id": "7467bd93b8724609bf6eebe95119fb8c",
+      "x_should_retry": null,
+      "ok": true
+    },
+    {
+      "probe": "33 indexes",
+      "want_status": 400,
+      "got_status": 403,
+      "want_code": null,
+      "got_code": "permission_error",
+      "message": "X-Moss-Indexes names an index outside this project",
+      "request_id": "2fcdbf97a4424e7089137977985226a9",
+      "x_should_retry": null,
+      "ok": false
+    },
+    {
+      "probe": "wrong key",
+      "want_status": 401,
+      "got_status": 401,
+      "want_code": null,
+      "got_code": "authentication_error",
+      "message": "The project credentials were rejected",
+      "request_id": "5383c232a38c42c2a10fcda29253baf4",
+      "x_should_retry": null,
+      "ok": true
+    },
+    {
+      "probe": "no auth header",
+      "want_status": 401,
+      "got_status": 401,
+      "want_code": null,
+      "got_code": "authentication_error",
+      "message": "Missing bearer token",
+      "request_id": "3c060993fb264d21882c03d85ada0156",
+      "x_should_retry": null,
+      "ok": true
+    },
+    {
+      "probe": "chat: messages missing",
+      "want_status": 400,
+      "got_status": 400,
+      "want_code": null,
+      "got_code": "invalid_request_error",
+      "message": "messages is required",
+      "request_id": "b659ad8a2114419db81bce23b67f8e2f",
+      "x_should_retry": null,
+      "ok": true
+    },
+    {
+      "probe": "instructions as list",
+      "want_status": 400,
+      "got_status": 400,
+      "want_code": null,
+      "got_code": "invalid_request_error",
+      "message": "instructions must be a string",
+      "request_id": "037005c73c97451d8287ff6c176ed475",
+      "x_should_retry": null,
+      "ok": true
+    },
+    {
+      "probe": "max_output_tokens=5",
+      "want_status": 200,
+      "got_status": 200,
+      "want_code": "status=incomplete",
+      "got_code": "status=incomplete",
+      "message": null,
+      "request_id": "fd33285a9f5443178fa38332c51cba81",
+      "x_should_retry": null,
+      "ok": true
+    },
+    {
+      "probe": "malformed JSON",
+      "want_status": 400,
+      "got_status": 400,
+      "want_code": null,
+      "got_code": "invalid_request_error",
+      "message": "Request body must be JSON",
+      "request_id": "ba33ec54db0e45cd9990b8dcb359c48d",
+      "x_should_retry": null,
+      "ok": true
+    },
+    {
+      "probe": "stop stream after first token",
+      "want_status": 200,
+      "got_status": 200,
+      "want_code": null,
+      "got_code": null,
+      "message": "first token 194.9081999482587 ms; next call 200",
+      "request_id": "a87ba8cd1e964a9bbac8c6764c145d6b",
+      "x_should_retry": null,
+      "ok": true
+    }
+  ],
+  "finished": 1795676468.195881
+}

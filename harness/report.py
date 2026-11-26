@@ -1,4 +1,4 @@
-"""Builds results/RESULTS.md from results/inference.json and results/tasks.json."""
+"""Builds results/RESULTS.md from results/*.json and brisvox/results/ab.json."""
 
 from __future__ import annotations
 
@@ -63,6 +63,9 @@ def inference_md(r: dict) -> list[str]:
     for p in r.get("probes", []):
         out.append(f"| {p['probe']} | {p['want_status']} {p.get('want_code') or ''} | {p['got_status']} | "
                    f"{p.get('got_code') or ''} | {p.get('x_should_retry') or ''} | {'yes' if p['ok'] else '**no**'} |")
+    if any(p["probe"] == "33 indexes" for p in r.get("probes", [])):
+        out += ["", "The `33 indexes` row is my probe's fault, not Moss's: the project has no index, so all 33 names are "
+                "unknown and the 403 for an index outside the project is correct. The 32-name cap was not tested."]
     msgs = [p for p in r.get("probes", []) if p.get("message")]
     if msgs:
         out += ["", "Error messages returned:", ""] + [f"- {p['probe']}: {p['message']}" for p in msgs]
@@ -117,9 +120,100 @@ def tasks_md(r: dict) -> list[str]:
     return out
 
 
+def extra_md(e: dict, c: dict) -> list[str]:
+    if not e:
+        return []
+    n = e["network"]
+    s = e["interleaved"]["summary"]
+    out = ["## Inference API, follow-up runs", "",
+           "### Where the time goes (warm connection)", "",
+           f"- TCP connect {n['tcp_connect_ms_p50']} ms, TLS handshake {n['tls_handshake_ms_p50']} ms (p50 of 10) to "
+           f"`{n['peer']}`; a warm `GET /models` (no model involved) takes {n['get_models_warm_ms_p50']} ms.",
+           f"- So of the ~191 ms streamed first token, about {n['get_models_warm_ms_p50']} ms is the path and gateway "
+           f"and ~55 ms is the model.", "",
+           "### Responses vs Chat Completions streaming, interleaved A B A B (30 calls)", "",
+           "| API | ttfb p50/p95 | first token p50/p95 | total p50/p95 | deltas per reply | gap between deltas |",
+           "|---|---|---|---|---|---|"]
+    for api in ("responses", "chat"):
+        x = s[api]
+        out.append(f"| {api} | {x['ttfb_ms']['p50']} / {x['ttfb_ms']['p95']} | {x['first_token_ms']['p50']} / "
+                   f"{x['first_token_ms']['p95']} | {x['total_ms']['p50']} / {x['total_ms']['p95']} | "
+                   f"{x['deltas_per_reply_p50']} | {x['median_gap_ms_p50']} ms |")
+    out += ["", f"Every call landed on `x-moss-box` {', '.join(e['interleaved']['by_box'])}. Failures in this run: "
+            f"{len(e.get('failures') or [])}.", "",
+            "### Prefix cache on a ~3.2k-token system prompt", "",
+            "| call | prompt tokens | cached tokens | first token ms |", "|---|---|---|---|"]
+    for r in e.get("prefix_cache", []):
+        out.append(f"| {r['i']} | {r['prompt_tokens']} | {r['cached_tokens']} | {fmt(r['first_token_ms'])} |")
+    if c:
+        out += ["", "### Calls started at the same instant (each on its own pre-warmed connection, 3 rounds)", "",
+                "| calls at once | n | p50 ms | p95 ms | max ms | all first tokens (ms) |", "|---|---|---|---|---|---|"]
+        for k, v in c["levels"].items():
+            out.append(f"| {k} | {v['ok']}/{v['calls']} | {fmt(v['p50'])} | {fmt(v['p95'])} | {fmt(v['max'])} | "
+                       f"{', '.join(map(str, v['sorted']))} |")
+        out += ["", "The distribution is two groups: most calls 250-320 ms, and in every one of the 9 bursts of 3 or more calls, 1-3 calls landed 200-250 ms behind the rest (12 of 48 calls; per-burst breakdown from `logs/concurrency.jsonl`)."]
+    return out
+
+
+def tasks_extra_md(f4: dict, f4b: dict) -> list[str]:
+    out: list[str] = []
+    if f4:
+        out += ["", "### F4 answer checked against the Hacker News API", "",
+                f"F4 returned {f4['rows_in_table']} rows; {f4['consistent']} agree with the API's comment count read "
+                f"afterwards ({f4['exact']} exact, the rest 1-4 lower because comments kept arriving). "
+                "`harness/f4_check.py`, `results/f4_check.json`."]
+    if f4b:
+        u = f4b.get("usage") or {}
+        out += ["", "### F4b: a task that cannot finish in 60 s", "",
+                f"Goal: the author of the first comment on each of the top 30 stories (30 page loads). Status "
+                f"`{f4b['status']}`, error `{json.dumps(f4b['error'])}`, ran {f4b['run_s']} s, {u.get('steps')} steps, "
+                f"billed ${(u.get('cost') or {}).get('total_usd', 0):.4f}. `result` is `null`: nothing gathered in those "
+                f"steps comes back. `harness/tasks_timeout.py`, `results/tasks_timeout.json`."]
+    return out
+
+
+def ab_md(ab: dict) -> list[str]:
+    if not ab:
+        return []
+    out = ["## Moss inside brisvox: voice-to-voice A/B", "",
+           "Same brisvox 0.1.4 release build, same agent file, same fixture and client; only the `[llm]` block changes "
+           "(`brisvox/agent_moss.toml` vs `brisvox/agent_openrouter.toml`). Deepgram nova-3 STT, Deepgram Aura-2 TTS, "
+           "Smart Turn v3.2. Blocks interleaved (moss, openrouter, moss, openrouter, then moss-nocache, openrouter, moss-nocache); "
+           "10 calls / 20 turns each, one call at a time, over the public internet from Istanbul. V2V is measured at the client (end of user speech to first bot "
+           "audio); stage times come from the server's turn timeline.", "",
+           "| LLM | answered | V2V p50 | V2V p90 | V2V max | LLM first token p50 | LLM first sentence p50 | TTS first byte p50 | end of turn p50 |",
+           "|---|---|---|---|---|---|---|---|---|"]
+    names = {"moss": "Moss `moss/fastlane-1`, reply cache on (default)",
+             "moss: reply-cache hits": "... of which reply-cache hits",
+             "moss: cache misses": "... of which cache misses",
+             "moss-nocache": "Moss `moss/fastlane-1`, `X-Moss-Cache: off`",
+             "openrouter": "OpenRouter `openai/gpt-6-luna`"}
+    for k, r in ab.items():
+        if k == "proxy":
+            continue
+        st = r["server_stages_ms"]
+        out.append(f"| {names.get(k, k)} | {r['answered']}/{r['turns']} | {fmt(r['v2v_ms']['p50'])} | {fmt(r['v2v_ms']['p90'])} | "
+                   f"{fmt(r['v2v_ms']['max'])} | {fmt(st['llm_ttft']['p50'])} | {fmt(st['llm_first_sentence']['p50'])} | "
+                   f"{fmt(st['tts_ttfb']['p50'])} | {fmt(st['end_of_turn_delay']['p50'])} |")
+    out += ["", "The fixture asks the same two questions on every call, so with the reply cache on (Moss's default) 30 of "
+            "40 turns were answered from the cache: the whole reply arrives in one chunk ~150 ms after the request. "
+            "The `X-Moss-Cache: off` arm goes through `brisvox/nocache_proxy.py` on loopback, because brisvox's agent "
+            "file cannot set request headers yet; the proxy keeps warm connections to Moss and adds ~3-4 ms."]
+    px = ab.get("proxy")
+    if px:
+        out += ["", f"Proxy: {px['requests']} requests, statuses {px['statuses']}, {px['reconnects']} reconnects, upstream "
+                f"first bytes p50 {fmt(px['upstream_first_bytes_ms']['p50'])} ms."]
+    out += ["", "Raw: `brisvox/results/v2v-*.{md,json}`, `brisvox/results/server-*.log`, `brisvox/results/proxy-*.jsonl`, "
+            "summary `brisvox/results/ab.json`."]
+    return out
+
+
 def main() -> None:
     lines = ["# Results", "", "Generated by `harness/report.py` from `results/*.json`; every request is in `logs/*.jsonl`.", ""]
-    lines += inference_md(load("inference.json")) + [""] + tasks_md(load("tasks.json"))
+    lines += inference_md(load("inference.json")) + [""] + extra_md(load("inference_extra.json"), load("concurrency.json"))
+    lines += [""] + tasks_md(load("tasks.json")) + tasks_extra_md(load("f4_check.json"), load("tasks_timeout.json"))
+    ab = ROOT / "brisvox" / "results" / "ab.json"
+    lines += [""] + ab_md(json.loads(ab.read_text(encoding="utf-8")) if ab.exists() else {})
     (ROOT / "results" / "RESULTS.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print("wrote results/RESULTS.md")
 

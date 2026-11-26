@@ -1,0 +1,405 @@
+{
+  "schema": "brisvox-bench/v2v/3",
+  "mode": "live",
+  "target": "ws://127.0.0.1:28090",
+  "settings": {
+    "runs": 10,
+    "concurrency": 1,
+    "fixtures": [
+      "en_two_utterances"
+    ],
+    "min_gap_ms": 9000,
+    "frame_ms": 20,
+    "silence_peak": 200,
+    "overlap_guard_ms": 100,
+    "response_timeout_ms": 10000
+  },
+  "engine": null,
+  "mock_bot": null,
+  "runs": [
+    {
+      "fixture": "en_two_utterances",
+      "run": 0,
+      "call_id": "ws-1",
+      "turns": [
+        {
+          "index": 0,
+          "lang": "en",
+          "eos_us": 6670000,
+          "outcome": "answered",
+          "v2v_us": 1127546
+        },
+        {
+          "index": 1,
+          "lang": "en",
+          "eos_us": 18430000,
+          "outcome": "answered",
+          "v2v_us": 953662
+        }
+      ],
+      "frames_sent": 982,
+      "audio_frames_received": 221,
+      "audible_frames": 193,
+      "clears": 1,
+      "server_errors": [],
+      "max_send_lateness_us": 22639,
+      "failure": null,
+      "kind": "latency"
+    },
+    {
+      "fixture": "en_two_utterances",
+      "run": 1,
+      "call_id": "ws-2",
+      "turns": [
+        {
+          "index": 0,
+          "lang": "en",
+          "eos_us": 6670000,
+          "outcome": "answered",
+          "v2v_us": 645090
+        },
+        {
+          "index": 1,
+          "lang": "en",
+          "eos_us": 18430000,
+          "outcome": "answered",
+          "v2v_us": 632332
+        }
+      ],
+      "frames_sent": 982,
+      "audio_frames_received": 245,
+      "audible_frames": 207,
+      "clears": 1,
+      "server_errors": [],
+      "max_send_lateness_us": 25912,
+      "failure": null,
+      "kind": "latency"
+    },
+    {
+      "fixture": "en_two_utterances",
+      "run": 2,
+      "call_id": "ws-3",
+      "turns": [
+        {
+          "index": 0,
+          "lang": "en",
+          "eos_us": 6670000,
+          "outcome": "answered",
+          "v2v_us": 1042571
+        },
+        {
+          "index": 1,
+          "lang": "en",
+          "eos_us": 18430000,
+          "outcome": "answered",
+          "v2v_us": 1024136
+        }
+      ],
+      "frames_sent": 982,
+      "audio_frames_received": 321,
+      "audible_frames": 293,
+      "clears": 1,
+      "server_errors": [],
+      "max_send_lateness_us": 20071,
+      "failure": null,
+      "kind": "latency"
+    },
+    {
+      "fixture": "en_two_utterances",
+      "run": 3,
+      "call_id": "ws-4",
+      "turns": [
+        {
+          "index": 0,
+          "lang": "en",
+          "eos_us": 6670000,
+          "outcome": "answered",
+          "v2v_us": 817846
+        },
+        {
+          "index": 1,
+          "lang": "en",
+          "eos_us": 18430000,
+          "outcome": "answered",
+          "v2v_us": 789511
+        }
+      ],
+      "frames_sent": 982,
+      "audio_frames_received": 299,
+      "audible_frames": 257,
+      "clears": 1,
+      "server_errors": [],
+      "max_send_lateness_us": 24183,
+      "failure": null,
+      "kind": "latency"
+    },
+    {
+      "fixture": "en_two_utterances",
+      "run": 4,
+      "call_id": "ws-5",
+      "turns": [
+        {
+          "index": 0,
+          "lang": "en",
+          "eos_us": 6670000,
+          "outcome": "answered",
+          "v2v_us": 808533
+        },
+        {
+          "index": 1,
+          "lang": "en",
+          "eos_us": 18430000,
+          "outcome": "answered",
+          "v2v_us": 1087443
+        }
+      ],
+      "frames_sent": 982,
+      "audio_frames_received": 289,
+      "audible_frames": 257,
+      "clears": 1,
+      "server_errors": [],
+      "max_send_lateness_us": 23683,
+      "failure": null,
+      "kind": "latency"
+    },
+    {
+      "fixture": "en_two_utterances",
+      "run": 5,
+      "call_id": "ws-6",
+      "turns": [
+        {
+          "index": 0,
+          "lang": "en",
+          "eos_us": 6670000,
+          "outcome": "answered",
+          "v2v_us": 1369224
+        },
+        {
+          "index": 1,
+          "lang": "en",
+          "eos_us": 18430000,
+          "outcome": "answered",
+          "v2v_us": 835154
+        }
+      ],
+      "frames_sent": 982,
+      "audio_frames_received": 314,
+      "audible_frames": 280,
+      "clears": 1,
+      "server_errors": [],
+      "max_send_lateness_us": 21165,
+      "failure": null,
+      "kind": "latency"
+    },
+    {
+      "fixture": "en_two_utterances",
+      "run": 6,
+      "call_id": "ws-7",
+      "turns": [
+        {
+          "index": 0,
+          "lang": "en",
+          "eos_us": 6670000,
+          "outcome": "answered",
+          "v2v_us": 1098662
+        },
+        {
+          "index": 1,
+          "lang": "en",
+          "eos_us": 18430000,
+          "outcome": "answered",
+          "v2v_us": 830454
+        }
+      ],
+      "frames_sent": 982,
+      "audio_frames_received": 312,
+      "audible_frames": 274,
+      "clears": 1,
+      "server_errors": [],
+      "max_send_lateness_us": 26474,
+      "failure": null,
+      "kind": "latency"
+    },
+    {
+      "fixture": "en_two_utterances",
+      "run": 7,
+      "call_id": "ws-8",
+      "turns": [
+        {
+          "index": 0,
+          "lang": "en",
+          "eos_us": 6670000,
+          "outcome": "answered",
+          "v2v_us": 786633
+        },
+        {
+          "index": 1,
+          "lang": "en",
+          "eos_us": 18430000,
+          "outcome": "answered",
+          "v2v_us": 769339
+        }
+      ],
+      "frames_sent": 982,
+      "audio_frames_received": 298,
+      "audible_frames": 266,
+      "clears": 1,
+      "server_errors": [],
+      "max_send_lateness_us": 25157,
+      "failure": null,
+      "kind": "latency"
+    },
+    {
+      "fixture": "en_two_utterances",
+      "run": 8,
+      "call_id": "ws-9",
+      "turns": [
+        {
+          "index": 0,
+          "lang": "en",
+          "eos_us": 6670000,
+          "outcome": "answered",
+          "v2v_us": 790976
+        },
+        {
+          "index": 1,
+          "lang": "en",
+          "eos_us": 18430000,
+          "outcome": "answered",
+          "v2v_us": 780151
+        }
+      ],
+      "frames_sent": 982,
+      "audio_frames_received": 330,
+      "audible_frames": 309,
+      "clears": 1,
+      "server_errors": [],
+      "max_send_lateness_us": 25725,
+      "failure": null,
+      "kind": "latency"
+    },
+    {
+      "fixture": "en_two_utterances",
+      "run": 9,
+      "call_id": "ws-10",
+      "turns": [
+        {
+          "index": 0,
+          "lang": "en",
+          "eos_us": 6670000,
+          "outcome": "answered",
+          "v2v_us": 817679
+        },
+        {
+          "index": 1,
+          "lang": "en",
+          "eos_us": 18430000,
+          "outcome": "answered",
+          "v2v_us": 777918
+        }
+      ],
+      "frames_sent": 982,
+      "audio_frames_received": 300,
+      "audible_frames": 275,
+      "clears": 1,
+      "server_errors": [],
+      "max_send_lateness_us": 26377,
+      "failure": null,
+      "kind": "latency"
+    }
+  ],
+  "failed_runs": 0,
+  "overall": {
+    "turns": 20,
+    "answered": 20,
+    "talked_over": 0,
+    "bot_speaking": 0,
+    "no_response": 0,
+    "v2v": {
+      "count": 20,
+      "p50_us": 817679,
+      "p90_us": 1098662,
+      "p95_us": 1127546,
+      "p99_us": 1369224,
+      "max_us": 1369224
+    }
+  },
+  "per_fixture": [
+    {
+      "name": "en_two_utterances",
+      "turns": 20,
+      "answered": 20,
+      "talked_over": 0,
+      "bot_speaking": 0,
+      "no_response": 0,
+      "v2v": {
+        "count": 20,
+        "p50_us": 817679,
+        "p90_us": 1098662,
+        "p95_us": 1127546,
+        "p99_us": 1369224,
+        "max_us": 1369224
+      }
+    }
+  ],
+  "per_language": [
+    {
+      "name": "en",
+      "turns": 20,
+      "answered": 20,
+      "talked_over": 0,
+      "bot_speaking": 0,
+      "no_response": 0,
+      "v2v": {
+        "count": 20,
+        "p50_us": 817679,
+        "p90_us": 1098662,
+        "p95_us": 1127546,
+        "p99_us": 1369224,
+        "max_us": 1369224
+      }
+    }
+  ],
+  "per_turn": [
+    {
+      "fixture": "en_two_utterances",
+      "index": 0,
+      "lang": "en",
+      "eos_us": 6670000,
+      "turns": 10,
+      "answered": 10,
+      "talked_over": 0,
+      "bot_speaking": 0,
+      "no_response": 0,
+      "v2v": {
+        "count": 10,
+        "p50_us": 817679,
+        "p90_us": 1127546,
+        "p95_us": 1369224,
+        "p99_us": 1369224,
+        "max_us": 1369224
+      }
+    },
+    {
+      "fixture": "en_two_utterances",
+      "index": 1,
+      "lang": "en",
+      "eos_us": 18430000,
+      "turns": 10,
+      "answered": 10,
+      "talked_over": 0,
+      "bot_speaking": 0,
+      "no_response": 0,
+      "v2v": {
+        "count": 10,
+        "p50_us": 789511,
+        "p90_us": 1024136,
+        "p95_us": 1087443,
+        "p99_us": 1087443,
+        "max_us": 1087443
+      }
+    }
+  ],
+  "max_send_lateness_us": 26474,
+  "engine_stages": null
+}

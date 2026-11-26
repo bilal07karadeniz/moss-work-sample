@@ -1,0 +1,22 @@
+  en_two_utterances run 7: 809.276 ms, 773.741 ms
+  en_two_utterances run 8: 802.229 ms, 778.126 ms
+  en_two_utterances run 9: 678.396 ms, 955.310 ms
+wrote C:/Bilal/moss-work-sample/brisvox/results/v2v-moss-1.json
+wrote C:/Bilal/moss-work-sample/brisvox/results/v2v-moss-1.md
+  en_two_utterances run 7: 1577.051 ms, 2268.051 ms
+  en_two_utterances run 8: 1450.837 ms, 1413.062 ms
+  en_two_utterances run 9: 1636.681 ms, 1226.851 ms
+wrote C:/Bilal/moss-work-sample/brisvox/results/v2v-openrouter-1.json
+wrote C:/Bilal/moss-work-sample/brisvox/results/v2v-openrouter-1.md
+  en_two_utterances run 7: 786.633 ms, 769.339 ms
+  en_two_utterances run 8: 790.976 ms, 780.151 ms
+  en_two_utterances run 9: 817.679 ms, 777.918 ms
+wrote C:/Bilal/moss-work-sample/brisvox/results/v2v-moss-2.json
+wrote C:/Bilal/moss-work-sample/brisvox/results/v2v-moss-2.md
+  en_two_utterances run 7: 1452.972 ms, 1232.358 ms
+  en_two_utterances run 8: 1678.771 ms, 1381.814 ms
+  en_two_utterances run 9: 1645.422 ms, 1319.379 ms
+wrote C:/Bilal/moss-work-sample/brisvox/results/v2v-openrouter-2.json
+wrote C:/Bilal/moss-work-sample/brisvox/results/v2v-openrouter-2.md
+done
+exit 0

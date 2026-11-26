@@ -112,8 +112,22 @@ class Moss:
 
     # -- requests -----------------------------------------------------------------------
     def request(self, method: str, path: str, body: Any = None, *, test: str, headers: dict | None = None,
-                fresh: bool = False, auth: str | None = None, raw_body: bytes | None = None) -> Result:
-        """A blocking request; the whole body is read and parsed as JSON when possible."""
+                fresh: bool = False, auth: str | None = None, raw_body: bytes | None = None,
+                retry_429: int = 3) -> Result:
+        """A blocking request; on 429 waits for Retry-After and tries again (each attempt is logged)."""
+        result = self._request_once(method, path, body, test=test, headers=headers, fresh=fresh, auth=auth,
+                                    raw_body=raw_body)
+        while result.status == 429 and retry_429 > 0:
+            retry_429 -= 1
+            wait = float(result.headers.get("retry-after", "2") or 2)
+            self._log({"ts": time.time(), "suite": self.suite, "test": test, "note": f"429, waiting {wait}s"})
+            time.sleep(min(wait, 30))
+            result = self._request_once(method, path, body, test=test + ".retry", headers=headers, fresh=fresh,
+                                        auth=auth, raw_body=raw_body)
+        return result
+
+    def _request_once(self, method: str, path: str, body: Any = None, *, test: str, headers: dict | None = None,
+                      fresh: bool = False, auth: str | None = None, raw_body: bytes | None = None) -> Result:
         hdrs = self._headers(headers, auth)
         payload = raw_body if raw_body is not None else (json.dumps(body).encode() if body is not None else None)
         t0 = time.perf_counter()
@@ -159,12 +173,13 @@ class Moss:
         try:
             conn.request("POST", self.prefix + path, body=json.dumps(body).encode(), headers=hdrs)
             resp = conn.getresponse()
-        except (http.client.HTTPException, OSError):
+        except (http.client.HTTPException, OSError) as exc:
             self.conn = None
             conn = self._connection(True)
             t0 = time.perf_counter()
             conn.request("POST", self.prefix + path, body=json.dumps(body).encode(), headers=hdrs)
             resp = conn.getresponse()
+            self._log({"note": f"stream reconnected after {type(exc).__name__}", "test": test})
         ttfb = (time.perf_counter() - t0) * 1000
         resp_headers = {k.lower(): v for k, v in resp.getheaders()}
         events: list[dict] = []
@@ -191,6 +206,10 @@ class Moss:
             if stop_after_first_token:
                 self.conn.close()  # abandon the rest of the stream
                 self.conn = None
+            else:
+                # Drain what follows `data: [DONE]` (the chunked terminator). Without this the
+                # keep-alive connection is unusable and the next call pays a new TCP+TLS handshake.
+                resp.read()
         total = (time.perf_counter() - t0) * 1000
         result = Result(resp.status, resp_headers, error_body, ttfb, total, first_token, events, "".join(text_parts))
         self._log({

@@ -1,0 +1,35 @@
+{
+  "id": "task_350fd9ba572048cfb629f5fdd2bf3065",
+  "status": "failed",
+  "error": {
+    "code": "time_limit",
+    "message": "Stopped after 60 s"
+  },
+  "limits": {
+    "max_cost_usd": 0.2,
+    "max_runtime_seconds": 60
+  },
+  "run_s": 61.4,
+  "usage": {
+    "cost": {
+      "model_usd": 0.010615,
+      "total_usd": 0.010948,
+      "browser_usd": 0.0003333333333333333,
+      "traffic_usd": null
+    },
+    "steps": 5,
+    "cost_usd": 0.010615,
+    "model_calls": 7,
+    "input_tokens": 45219,
+    "output_tokens": 2697,
+    "browser_minutes": 1.01,
+    "browser_seconds": 61,
+    "browser_traffic_mb": null,
+    "cached_input_tokens": 33743
+  },
+  "verification": null,
+  "output_text": "",
+  "rows_claimed": 0,
+  "rows_matching_api": 0,
+  "checks": []
+}

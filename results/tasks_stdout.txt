@@ -1,0 +1,94 @@
+{
+  "total_cost_usd": 0.119,
+  "unfinished": [],
+  "tasks": [
+    [
+      "K1 example.com heading",
+      "completed",
+      {
+        "status": "completed",
+        "error_code": null,
+        "verification_passed": true,
+        "correct": false
+      }
+    ],
+    [
+      "K2 value from the Moss docs",
+      "completed",
+      {
+        "status": "completed",
+        "error_code": null,
+        "verification_passed": true,
+        "correct": true
+      }
+    ],
+    [
+      "K3 top 5 Hacker News stories",
+      "completed",
+      {
+        "status": "completed",
+        "error_code": null,
+        "verification_passed": true,
+        "in_order_matches": 5,
+        "set_overlap": 5,
+        "correct": true
+      }
+    ],
+    [
+      "CANCEL-0",
+      "cancelled",
+      {}
+    ],
+    [
+      "CANCEL-1",
+      "cancelled",
+      {}
+    ],
+    [
+      "IDEM",
+      "completed",
+      {}
+    ],
+    [
+      "F1 missing data",
+      "completed",
+      {
+        "status": "completed",
+        "error_code": null,
+        "verification_passed": true,
+        "hallucinated": false,
+        "behaved": true
+      }
+    ],
+    [
+      "F3 $0.01 budget",
+      "failed",
+      {
+        "status": "failed",
+        "error_code": "budget_exceeded",
+        "verification_passed": null,
+        "behaved": true
+      }
+    ],
+    [
+      "F2 dead URL",
+      "completed",
+      {
+        "status": "completed",
+        "error_code": null,
+        "verification_passed": null,
+        "behaved": true
+      }
+    ],
+    [
+      "F4 60 s time limit",
+      "completed",
+      {
+        "status": "completed",
+        "error_code": null,
+        "verification_passed": null,
+        "behaved": false
+      }
+    ]
+  ]
+}

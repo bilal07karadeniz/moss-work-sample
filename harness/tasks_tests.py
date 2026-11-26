@@ -138,6 +138,7 @@ def wait_all(m: Moss, ids: dict[str, str]) -> dict[str, dict]:
             if body.get("status") in ("completed", "failed", "cancelled"):
                 body["_seen_running_at"] = first_running.get(label)
                 done[label] = body
+            time.sleep(0.7)  # keep polling well under the 10-request burst limit
         time.sleep(POLL_S)
     return done
 
@@ -179,7 +180,7 @@ def validation(m: Moss) -> list[dict]:
             c = m.request("POST", f"/tasks/{r.body['id']}/cancel", test=f"validate.{name}.cancel")
             row["accepted_task_cancelled"] = (c.body or {}).get("status") if isinstance(c.body, dict) else c.status
         out.append(row)
-        time.sleep(0.3)
+        time.sleep(0.6)
     for name, path, method in (("get unknown task", "/tasks/task_" + "0" * 32, "GET"),
                                ("cancel unknown task", "/tasks/task_" + "0" * 32 + "/cancel", "POST"),
                                ("get malformed id", "/tasks/not-a-task-id", "GET")):
@@ -285,7 +286,7 @@ def main() -> None:
                                                                        "browser_traffic_mb")},
                "queue_s": round(start - made, 1) if start and made else None,
                "run_s": round(end - start, 1) if start and end else None,
-               "output_text": ((t.get("result") or {}).get("output_text") or "")[:1500],
+               "output_text": (t.get("result") or {}).get("output_text") or "",
                "output": (t.get("result") or {}).get("output"), "verification": t.get("verification")}
         if spec:
             row["kind"], row["expect"] = spec["kind"], spec["expect"]

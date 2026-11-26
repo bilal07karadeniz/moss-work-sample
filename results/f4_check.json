@@ -1,0 +1,218 @@
+{
+ "checked_at": 1795677505.1964402,
+ "rows_in_table": 30,
+ "consistent": 30,
+ "exact": 15,
+ "rows": [
+  {
+   "id": "50646108",
+   "title": "Holy shit holy shit holy shit holy shit: The magnitude of what’s now happening",
+   "task_count": 1148,
+   "api_count_after": 1153,
+   "ok": true
+  },
+  {
+   "id": "50644817",
+   "title": "1Password Security Incident",
+   "task_count": 563,
+   "api_count_after": 566,
+   "ok": true
+  },
+  {
+   "id": "50651719",
+   "title": "Lions' Commentary on Unix: Why It Was Secretly Copied for 20 Years",
+   "task_count": 2,
+   "api_count_after": 2,
+   "ok": true
+  },
+  {
+   "id": "50648050",
+   "title": "Much shorter version of GRH Lean verification from Anthropic",
+   "task_count": 206,
+   "api_count_after": 207,
+   "ok": true
+  },
+  {
+   "id": "50650892",
+   "title": "Minipg: PostgreSQL as a Single Executable",
+   "task_count": 10,
+   "api_count_after": 11,
+   "ok": true
+  },
+  {
+   "id": "50649864",
+   "title": "Tell HN: Lots of Ask HNs again",
+   "task_count": 83,
+   "api_count_after": 85,
+   "ok": true
+  },
+  {
+   "id": "50649834",
+   "title": "Collection of preserved UI style guides",
+   "task_count": 11,
+   "api_count_after": 13,
+   "ok": true
+  },
+  {
+   "id": "50626466",
+   "title": "What VP ≠ VNP Means (In 3 Minutes)",
+   "task_count": 16,
+   "api_count_after": 16,
+   "ok": true
+  },
+  {
+   "id": "50647181",
+   "title": "Slow Ubuntu security response times",
+   "task_count": 108,
+   "api_count_after": 109,
+   "ok": true
+  },
+  {
+   "id": "50601280",
+   "title": "GPT-6.2 Astra is the first model to beat Googlers' code golf records",
+   "task_count": 92,
+   "api_count_after": 92,
+   "ok": true
+  },
+  {
+   "id": "50598636",
+   "title": "The Great Automatic Grammatizator (By Roald Dahl), 1954 [pdf]",
+   "task_count": 16,
+   "api_count_after": 17,
+   "ok": true
+  },
+  {
+   "id": "50643129",
+   "title": "A few questions for the guy who went snorkeling in a Home Depot retention pond",
+   "task_count": 113,
+   "api_count_after": 113,
+   "ok": true
+  },
+  {
+   "id": "50651117",
+   "title": "OpenAI cuts GPT-6.2 usage: Astra hits limits 40% faster, Sol 25% faster",
+   "task_count": 78,
+   "api_count_after": 82,
+   "ok": true
+  },
+  {
+   "id": "50651158",
+   "title": "Qualcomm's Oryon 3 Reaches the Top",
+   "task_count": 3,
+   "api_count_after": 3,
+   "ok": true
+  },
+  {
+   "id": "50648365",
+   "title": "Bare Metal Qwen",
+   "task_count": 28,
+   "api_count_after": 28,
+   "ok": true
+  },
+  {
+   "id": "50647673",
+   "title": "The New York Times warns photographers not to update Photoshop over AI features",
+   "task_count": 271,
+   "api_count_after": 275,
+   "ok": true
+  },
+  {
+   "id": "50648323",
+   "title": "Deploying a payphone on a tiny Pacific Island for fun and zero profit",
+   "task_count": 11,
+   "api_count_after": 11,
+   "ok": true
+  },
+  {
+   "id": "50623232",
+   "title": "Show HN: Synth Patch Hero",
+   "task_count": 2,
+   "api_count_after": 2,
+   "ok": true
+  },
+  {
+   "id": "50647161",
+   "title": "Nfs2root: A 12-year-old pre-auth remote root in the Linux kernel's NFS server",
+   "task_count": 45,
+   "api_count_after": 45,
+   "ok": true
+  },
+  {
+   "id": "50637448",
+   "title": "How did pinwheel calculators work?",
+   "task_count": 4,
+   "api_count_after": 4,
+   "ok": true
+  },
+  {
+   "id": "50589784",
+   "title": "SSH is a GUI framework",
+   "task_count": 83,
+   "api_count_after": 83,
+   "ok": true
+  },
+  {
+   "id": "50642086",
+   "title": "Google releases Cogentic papers on integer factorization, discrete logs and more",
+   "task_count": 345,
+   "api_count_after": 346,
+   "ok": true
+  },
+  {
+   "id": "50627532",
+   "title": "Xkcd and Fourier",
+   "task_count": 5,
+   "api_count_after": 6,
+   "ok": true
+  },
+  {
+   "id": "50644980",
+   "title": "The polynomial Hirsch conjecture is false [pdf]",
+   "task_count": 41,
+   "api_count_after": 41,
+   "ok": true
+  },
+  {
+   "id": "50641171",
+   "title": "Windows Loudness Equalization, reverse-engineered and ported to PipeWire",
+   "task_count": 186,
+   "api_count_after": 186,
+   "ok": true
+  },
+  {
+   "id": "50644814",
+   "title": "Deriving Black-Scholes",
+   "task_count": 45,
+   "api_count_after": 46,
+   "ok": true
+  },
+  {
+   "id": "50634381",
+   "title": "Marginal Grains",
+   "task_count": 0,
+   "api_count_after": 0,
+   "ok": true
+  },
+  {
+   "id": "50608175",
+   "title": "Can a TV be too large? An investigation",
+   "task_count": 69,
+   "api_count_after": 70,
+   "ok": true
+  },
+  {
+   "id": "50620991",
+   "title": "Hkust 3D Prints a Titanium Alloy That Keeps Hardening",
+   "task_count": 4,
+   "api_count_after": 5,
+   "ok": true
+  },
+  {
+   "id": "50616473",
+   "title": "The trouble with serendipity: Scientific discoveries don't happen how you think",
+   "task_count": 10,
+   "api_count_after": 10,
+   "ok": true
+  }
+ ]
+}
