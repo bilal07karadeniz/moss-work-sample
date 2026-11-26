@@ -134,7 +134,7 @@ Answers:
 - **CANCEL-1**: 
 - **IDEM**: The page title is **Example Domain**.
 - **F1 missing data**: {"phone": ""}
-- **F3 $0.01 budget**:  — error `budget_exceeded`: Spent $0.01
+- **F3 $0.01 budget**: . Error `budget_exceeded`: Spent $0.01
 - **F2 dead URL**: I couldn’t retrieve the shop’s opening hours. The supplied page failed on both attempts with `ERR_SOCKS_CONNECTION_FAILED` and showed no shop identity or hours: https://moss-work-sample-dead-host.invalid/hours.
 - **F4 60 s time limit**: | Title | Comment count |
 |---|---:|

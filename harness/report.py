@@ -98,7 +98,7 @@ def tasks_md(r: dict) -> list[str]:
     for t in r.get("tasks", []):
         ans = json.dumps(t.get("output")) if t.get("output") else (t.get("output_text") or "")
         err = t.get("error") or {}
-        out.append(f"- **{t['label']}**: {ans[:400]!s}" + (f" — error `{err.get('code')}`: {err.get('message')}" if err else "")
+        out.append(f"- **{t['label']}**: {ans[:400]!s}" + (f". Error `{err.get('code')}`: {err.get('message')}" if err else "")
                    + (f" (regraded: {(t.get('grade') or {}).get('regraded')})" if (t.get('grade') or {}).get('regraded') else ""))
     if r.get("hn_truth"):
         out += ["", f"Hacker News API top 5 at task creation: {r['hn_truth'][0]}",
